@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ติดตามสถานะแจ้งปัญหา - Khanu School Notication</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- CDN Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- CDN FontAwesome Pro -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/fontawesome.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/whiteboard-semibold.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/thumbprint-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/slab-press-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/slab-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-duotone-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/notdog-duo-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/notdog-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/jelly-fill-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/jelly-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/etch-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/duotone.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/brands.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/chisel-regular.css">
+
+    <link rel="stylesheet" href="/style/styles.css">
+    <link rel="icon" type="image/x-icon" href="asset/icons/logo_khanu512.png">
+</head>
+
+<body>
+    <div id="loader-container"></div>
+
+    <div class="main-container" style="display: none; padding-bottom: 150px;">
+        <div id="page-content4" class="p-3 h-100 pb-5 mb-5">
+            <div class="mb-0">
+                <span id="back-button" class="text-white" role="button" onclick="window.history.back();">
+                    <i class="fa-solid fa-chevron-left fa-xl"></i>
+                </span>
+            </div>
+            <div class="text-center text-white mb-3">
+                <img src="asset/icons/logo_khanu512.png" alt="Khanu School Logo" class="mb-2" style="width: 100px; height: 100px;">
+                <h2 class="mb-0">ติดตามสถานะแจ้งปัญหา</h2>
+                <p class="mb-0">โรงเรียนขาณุวิทยา
+                    <div role="button" data-bs-toggle="modal" data-bs-target="#infoModal">
+                        <i class="fa-solid fa-circle-info text-white"></i>
+                    </div>
+                </p>
+            </div>
+
+            <div class="container-fluid mb-3">
+                <div class="row text-center g-3">
+                    <div class="col-6">
+                        <div class="card border-0 shadow rounded-4 p-3 bg-gradient-allissue">
+                            <div class="row d-flex justify-content-center align-items-center mb-2">
+                                <div class="col-4 fs-3 opacity-25">
+                                    <i class="fa-solid fa-clipboard-list fa-2xl text-white-50"></i>
+                                </div>
+                                <div class="col d-flex align-items-center flex-column">
+                                    <div class="fw-semibold fs-1" id="total-issues">0</div>
+                                    <div class="font-size-14 text-white-50">เรื่องทั้งหมด</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card border-0 shadow rounded-4 p-3 bg-gradient-process">
+                            <div class="row d-flex justify-content-center align-items-center mb-2">
+                                <div class="col-4 fs-3 opacity-50">
+                                    <i class="fa-solid fa-hammer-brush fa-2xl text-white-50"></i>
+                                </div>
+                                <div class="col d-flex align-items-center flex-column">
+                                    <div class="fw-semibold fs-1" id="in-progress-issues">0</div>
+                                    <div class="font-size-14 text-dark-50">ดำเนินการ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card border-0 shadow rounded-4 p-3 bg-gradient-success">
+                            <div class="row d-flex justify-content-center align-items-center mb-2">
+                                <div class="col-4 fs-3 opacity-50">
+                                    <i class="fa-solid fa-thumbs-up fa-2xl text-white-50"></i>
+                                </div>
+                                <div class="col d-flex align-items-center flex-column">
+                                    <div class="fw-semibold fs-1" id="completed-issues">0</div>
+                                    <div class="font-size-14 text-white-50">เสร็จสิ้น</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card border-0 shadow rounded-4 p-3 bg-gradient-cencel">
+                            <div class="row d-flex justify-content-center align-items-center mb-2">
+                                <div class="col-4 fs-3 opacity-50">
+                                    <i class="fa-solid fa-ban fa-2xl text-white-50"></i>
+                                </div>
+                                <div class="col d-flex align-items-center flex-column">
+                                    <div class="fw-semibold fs-1" id="cancelled-issues">0</div>
+                                    <div class="font-size-14 text-white-50">ยกเลิก</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container-fluid p-3 pb-5 bg-white rounded-4 shadow">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <span class="font-size-14 text-muted"><i class="fa-solid fa-window-restore"></i> สถานะการแจ้งปัญหา</span>
+                </div>
+
+                <div id="issue-list" class="list-group">
+                    <!-- รายการแจ้งปัญหาจะถูกเพิ่มที่นี่โดย JavaScript -->
+                    <a href="#" class="list-group-item bg-image-logo list-group-item-action rounded-4 overflow-hidden mb-2">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1 fw-semibold"><img src="asset/icons/logo_khanu512.png" width="24" height="28"> ไฟฟ้าดับ อาคาร 2</h6>
+                            </div>
+                            <span class="badge bg-gradient-process text-dark font-size-12 py-2 px-3 fw-normal rounded-pill">
+                                <i class="fa-solid fa-hammer-brush me-1"></i>ดำเนินการ
+                            </span>
+                        </div>
+                        <span class="font-size-12 md-2 text-muted">#KHNU20240610003</span>
+                        <div class="d-flex flex-column mb-2">
+                            <span class="text-muted font-size-12">รายละเอียด: ไฟฟ้าดับตั้งแต่ชั้น 1 ถึงชั้น 3</span>
+                            <span class="text-muted font-size-12">สถานที่: อาคารวิทยศาสตร์</span>
+                            <span class="text-muted font-size-12">วันที่แจ้ง: 02/09/2568</span>
+                        </div>
+                    </a>
+
+                    <a href="#" class="list-group-item bg-image-logo list-group-item-action rounded-4 overflow-hidden mb-2">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1 fw-semibold"><img src="asset/icons/logo_khanu512.png" width="24" height="28"> คอมพิวเตอร์เสีย</h6>
+                            </div>
+                            <span class="badge bg-gradient-success text-white font-size-12 py-2 px-3 fw-normal rounded-pill">
+                                <i class="fa-solid fa-thumbs-up me-1"></i> เสร็จสิ้น
+                            </span>
+                        </div>
+                        <span class="font-size-12 md-2 text-muted">#KHNU20240610002</span>
+                        <div class="d-flex flex-column mb-2">
+                            <span class="text-muted font-size-12">รายละเอียด: คอมพิวเตอร์เสีย จำนวน 5 เครื่อง เปิดไม่ติด</span>
+                            <span class="text-muted font-size-12">สถานที่: อาคารเทคโนโลยี</span>
+                            <span class="text-muted font-size-12">วันที่แจ้ง: 02/09/2568</span>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="list-group-item bg-image-logo list-group-item-action rounded-4 overflow-hidden mb-2">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1 fw-semibold"><img src="asset/icons/logo_khanu512.png" width="24" height="28"> คอมพิวเตอร์เสีย</h6>
+                            </div>
+                            <span class="badge bg-gradient-cencel text-white font-size-12 py-2 px-3 fw-normal rounded-pill">
+                                <i class="fa-solid fa-ban me-1"></i> ยกเลิก
+                            </span>
+                        </div>
+                        <span class="font-size-12 md-2 text-muted">#KHNU20240610001</span>
+                        <div class="d-flex flex-column mb-2">
+                            <span class="text-muted font-size-12">รายละเอียด: คอมพิวเตอร์เสีย จำนวน 5 เครื่อง เปิดไม่ติด</span>
+                            <span class="text-muted font-size-12">สถานที่: อาคารเทคโนโลยี</span>
+                            <span class="text-muted font-size-12">วันที่แจ้ง: 02/09/2568</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="py-5 text-transparent">.</div>
+        <div id="control-button-space"></div>
+    </div>
+
+    <div id="infoModal" class="modal fade" tabindex="-1" aria-labelledby="infoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-5"> 
+                <div class="modal-body">
+                    <div class="table-responsives">
+                    <table class="table table-borderless align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-muted fw-semibold font-size-14">สถานะ</th>
+                                <th scope="col" class="text-muted fw-semibold font-size-14">คำอธิบาย</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span class="badge bg-gradient-allissue text-white font-size-14 fw-normal w-100 rounded-pill"><i
+                                            class="fa-solid fa-clipboard-list me-2"></i>เรื่องทั้งหมด</span>
+                                </td>
+                                <td class="font-size-14 text-muted">หมายถึง จำนวนเรื่องแจ้งปัญหาทั้งหมดที่ถูกบันทึกในระบบ</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge bg-gradient-process text-dark font-size-14 fw-normal w-100 rounded-pill"><i
+                                            class="fa-solid fa-hammer-brush me-2"></i>ดำเนินการ</span>
+                                </td>
+                                <td class="font-size-14 text-muted">หมายถึง จำนวนเรื่องแจ้งปัญหาที่อยู่ในระหว่างการดำเนินการแก้ไขหรือจัดการ</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge bg-gradient-success text-white font-size-14 fw-normal w-100 rounded-pill"><i
+                                            class="fa-solid fa-thumbs-up me-2"></i>เสร็จสิ้น</span>
+                                </td>
+                                <td class="font-size-14 text-muted">หมายถึง จำนวนเรื่องแจ้งปัญหาที่ได้รับการแก้ไขหรือจัดการเรียบร้อยแล้ว</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="badge bg-gradient-cencel text-white font-size-14 fw-normal w-100 rounded-pill"><i
+                                            class="fa-solid fa-ban me-2"></i>ยกเลิก</span>
+                                </td>
+                                <td class="font-size-14 text-muted">หมายถึง จำนวนเรื่องแจ้งปัญหาที่ถูกยกเลิกหรือไม่ดำเนินการต่อ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ตัวอย่างโค้ดสำหรับอัปเดตจำนวนแต่ละสถานะ
+        // ดึงข้อมูลจาก Firebase หรือแหล่งข้อมูลของคุณ แล้วอัปเดตตัวเลข
+        // สมมติใช้ค่าตัวอย่าง
+        document.getElementById('total-issues').textContent = 3;
+        document.getElementById('in-progress-issues').textContent = 1;
+        document.getElementById('completed-issues').textContent = 1;
+        document.getElementById('cancelled-issues').textContent = 1;
+    </script>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<!-- CDN liff -->
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<!-- CDN JQuery -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Bootstrap 5.3 JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+<script src="script/control-button.js"></script>
+<script src="script/script.js"></script>
+<script>
+    fetch('loader.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('loader-container').innerHTML = html;
+            // รอ 3 วินาทีแล้วซ่อน loader และแสดง main-container
+            setTimeout(() => {
+                document.getElementById('loader-container').style.display = 'none';
+                document.querySelector('.main-container').style.display = '';
+            }, 1500);
+        });
+</script>
+</body>
+</html>

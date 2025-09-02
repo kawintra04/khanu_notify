@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลงทะเบียนสมาชิกใหม่ - Khanu School Notication</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- CDN Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- CDN FontAwesome Pro -->
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/fontawesome.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/whiteboard-semibold.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/thumbprint-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/slab-press-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/slab-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-duotone-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/sharp-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/notdog-duo-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/notdog-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/jelly-fill-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/jelly-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/etch-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/duotone-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/duotone.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/duotone-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/duotone-light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/light.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/brands.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v7.0.0/css/chisel-regular.css">
+
+    <link rel="stylesheet" href="/style/styles.css">
+    <link rel="icon" type="image/x-icon" href="asset/icons/logo_khanu512.png">
+</head>
+
+<body>
+    <div id="loader-container"></div>
+
+    <div class="main-container p-3" style="display: none;">
+        <div class="container-fluid p-3 pb-0 mb-0">
+                <div class="text-center text-white mb-1">
+                    <img src="asset/icons/logo_khanu512.png" alt="Khanu School Logo" class="mb-2 rotate-3d-logo" style="width: 100px; height: 100px;">
+                    <h4 class="mb-0">ระบบแจ้งปัญหาภายในโรงเรียน</h4>
+                    <p class="mb-0">โรงเรียนขาณุวิทยา</p>
+                </div>
+            </div>
+        <div class="container-fluid bg-white bg-opacity-50 rounded-4 p-3 ">
+            <h5 class="text-dark-info mb-3"><i class="fa-duotone fa-solid fa-id-card me-2"></i>ลงทะเบียนสมาชิกใหม่
+            </h5>
+            
+            <form id="registerForm" class="mt-4 font-size-14 background-image px-3">
+                <div class="position-relative mb-3">
+                    <label for="firstname" class="form-label">ชื่อจริง</label>
+                    <input type="text" class="form-control rounded-pill font-size-14 form-padding" id="firstname"
+                        placeholder="กรอกชื่อจริง" required>
+                    <i class="fa-solid fa-user form-icon"></i>
+                </div>
+                <div class="position-relative mb-3">
+                    <label for="surname" class="form-label">นามสกุล</label>
+                    <input type="text" class="form-control rounded-pill font-size-14 form-padding" id="surname"
+                        placeholder="กรอกนามสกุล" required>
+                    <i class="fa-solid fa-house-chimney-user form-icon"></i>
+                </div>
+                <div class="position-relative mb-3">
+                    <span class="form-label">สถานะในโรงเรียน</span>
+                    <div class="btn-group mt-2 w-100" role="group" aria-label="สถานะในโรงเรียน">
+                        <input type="radio" class="btn-check" name="status" id="student" autocomplete="off" onchange="toggleStudentId(0)" checked>
+                        <label class="btn btn-outline-check rounded-4 rounded-end-0 font-size-14" for="student" style="width: 33.33%;">นักเรียน</label>
+
+                        <input type="radio" class="btn-check" name="status" id="teacher" autocomplete="off" onchange="toggleStudentId(0)">
+                        <label class="btn btn-outline-check rounded-0 font-size-14" for="teacher" style="width: 33.33%;">สภานักเรียน</label>
+
+                        <input type="radio" class="btn-check" name="status" id="parent" autocomplete="off" onchange="toggleStudentId(1)">
+                        <label class="btn btn-outline-check rounded-4 rounded-start-0 font-size-14" for="parent" style="width: 33.33%;">ครู/บุคลากร</label>
+                    </div>
+                </div>
+                <div class="position-relative mb-3" id="studentIDContainer">
+                    <label for="studentId" class="form-label">รหัสนักเรียน</label>
+                    <input type="text" class="form-control rounded-pill font-size-14 form-padding" id="studentId"
+                        placeholder="รหัสนักเรียน" required>
+                    <i class="fa-solid fa-address-card form-icon"></i>
+                </div>
+                <div class="position-relative mb-3">
+                    <label for="numberphone" class="form-label">หมายเลขโทรศัพท์</label>
+                    <input type="text" class="form-control rounded-pill font-size-14 form-padding" id="numberphone"
+                        placeholder="กรอกเบอร์โทรศัพท์" required>
+                    <i class="fa-solid fa-mobile form-icon"></i>
+                </div>
+                <div class="position-relative mb-3">
+                    <label for="email" class="form-label">อีเมล</label>
+                    <input type="text" class="form-control rounded-pill font-size-14 form-padding" id="email"
+                        placeholder="กรอกอีเมล" required>
+                    <i class="fa-solid fa-at form-icon"></i>
+                </div>
+
+                <div class="d-flex align-items-center mb-3">
+                    <div class="form-check ms-1">
+                        <input class="form-check-input fs-6" type="checkbox" value="" id="termsCheck" required>
+                        <label class="d-flex align-items-center font-size-14" for="termsCheck">
+                            ฉันยอมรับ <a href="#" target="_blank" class="text-decoration-none ms-1">ข้อกำหนดและเงื่อนไข</a> ของการใช้บริการ
+                        </label>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center mt-5 mb-2">
+                    <button type="submit" class="btn btn-sm btn-info rounded-pill px-5 py-1 font-size-14"
+                        id="submitReportBtn"><i class="fa-solid fa-paper-plane"></i> ลงมะเบียน</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <!-- CDN liff -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <!-- CDN JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script>
+        fetch('loader.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('loader-container').innerHTML = html;
+                // รอ 3 วินาทีแล้วซ่อน loader และแสดง main-container
+                setTimeout(() => {
+                    document.getElementById('loader-container').style.display = 'none';
+                    document.querySelector('.main-container').style.display = '';
+                }, 1500);
+            });
+
+            const toggleStudentId = (isParent) => {
+                const studentIDContainer = document.getElementById('studentIDContainer');
+                const studentIdInput = document.getElementById('studentId');
+                if (isParent) {
+                    studentIDContainer.style.display = 'none';
+                    studentIdInput.removeAttribute('required');
+                } else {
+                    studentIDContainer.style.display = '';
+                    studentIdInput.setAttribute('required', 'required');
+                }
+            };
+    </script>
+</body>
+</html>
