@@ -83,3 +83,13 @@ const toastAlert = (type, text, delay = 3000) => {
         toast.remove();
     });
 };
+
+const showLoader = (delay = 3000) => {
+    document.getElementById('loader-container').style.display = '';
+    document.querySelector('.main-container').style.display = 'none';
+    setTimeout(() => {
+        document.getElementById('loader-container').style.display = 'none';
+        document.querySelector('.main-container').style.display = '';
+    }, delay);
+
+}

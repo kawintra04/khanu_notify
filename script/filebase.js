@@ -124,6 +124,7 @@ async function handleLineUser() {
                     };
 
                     try {
+                        showLoader(2000); // แสดง loader เป็นเวลา 2 วินาที
                         await regRef.set(updatedData);
                         window.globalUserData = updatedData;
                         toastAlert(1, "แก้ไขข้อมูลสำเร็จ");
@@ -212,6 +213,7 @@ if (registrationForm) {
             displayName: window.lineUser.lineProfile.displayName,
             timestamp: Date.now(),
         };
+        showLoader(3000); 
         regRef.set(userData)
             .then(() => {
                 window.globalUserData = userData;

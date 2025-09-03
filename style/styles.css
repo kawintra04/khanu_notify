@@ -61,6 +61,7 @@ body::-webkit-scrollbar {
 .loader {
     background: linear-gradient(to bottom, #8800b2, #fff);
     min-height: 100vh;
+    z-index: 9998;
 }
 
 .loader-container {
