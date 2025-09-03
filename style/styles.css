@@ -319,7 +319,7 @@ a {
 }
 
 .text-dark-info {
-    color: #3b0a5a !important;
+    color: #53036b !important;
 }
 
 .form-padding {
@@ -570,6 +570,10 @@ a {
     pointer-events: none;
 }
 
+#editDataUserModal .background-image::after {
+    z-index: -1;
+}
+
 .background-image .btn,
 .background-image span,
 .background-image label,
@@ -599,6 +603,12 @@ a {
 
 }
 
+.btn-secondary-color {
+    background-color: #f5f5f5 !important;
+    border-color: #f5f5f5 !important;
+    color: #474747 !important;
+}
+
 .rotate-3d-logo {
     display: inline-block;
     animation: spinLogo 2s linear infinite;
@@ -613,4 +623,63 @@ a {
     to {
         transform: rotateY(-360deg);
     }
+}
+
+#editDataUserModal .modal-content {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    backdrop-filter: blur(4px);
+}
+
+.toast-container {
+    left: 20px;
+    bottom: 20px;
+    z-index: 9999;
+}
+
+.toast-onload.hide {
+    opacity: 0;
+}
+
+.toast-onload.show {
+    opacity: 1;
+}
+
+.toast-onload h5 {
+    font-size: 0.875rem;
+}
+
+.toast-onload h6 {
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.gradient-tsp {
+    background: rgba(255, 255, 255, 0);
+    background: linear-gradient(130deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 100%) !important;
+    box-shadow: none !important;
+}
+
+.gradient-yellow {
+    background: rgb(255, 178, 43);
+    background: linear-gradient(130deg, rgba(255, 178, 43, 1) 0%, rgba(140, 97, 12, 1) 100%) !important;
+}
+
+.gradient-blue {
+    background: rgb(61, 139, 242);
+    background: linear-gradient(130deg, rgba(61, 139, 242, 1) 0%, rgba(4, 75, 108, 1) 100%) !important;
+}
+
+.gradient-green {
+    background: rgb(6, 214, 155);
+    background: linear-gradient(130deg, rgba(6, 214, 155, 1) 0%, rgba(4, 99, 32, 1) 100%) !important;
+}
+
+.gradient-violet {
+    background: rgb(115, 90, 242);
+    background: linear-gradient(130deg, rgba(115, 90, 242, 1) 0%, rgba(44, 4, 99, 1) 100%) !important;
+}
+
+.gradient-red {
+    background: rgb(240, 82, 79);
+    background: linear-gradient(130deg, rgba(240, 82, 79, 1) 0%, rgba(99, 4, 27, 1) 100%) !important;
 }

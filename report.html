@@ -57,7 +57,7 @@
     <div class="main-container" style="display: none;">
         <div id="page-content3" class="p-3">
             <div class="container-fluid bg-white bg-opacity-50 rounded-4 p-3 ">
-                <h5 class="text-dark-info mb-3"><i class="fa-slab fa-regular fa-paper-plane"></i>   แจ้งปัญหาภายในโรงเรียน
+                <h5 class="text-dark-info mb-3"><i class="fa-slab fa-regular fa-paper-plane"></i> แจ้งปัญหาภายในโรงเรียน
                 </h5>
 
                 <form id="reportForm" class="mt-4 font-size-14">
@@ -137,6 +137,21 @@
         <div id="control-button-space"></div>
     </div>
 
+    <script>
+        fetch('loader.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('loader-container').innerHTML = html;
+                // รอ 3 วินาทีแล้วซ่อน loader และแสดง main-container
+                setTimeout(() => {
+                    document.getElementById('loader-container').style.display = 'none';
+                    document.querySelector('.main-container').style.display = '';
+                }, 1500);
+            });
+    </script>
+    <!-- LoadIcon -->
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
@@ -151,20 +166,16 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <script src="script/control-button.js"></script>
+    <!-- โหลด pageConfig.js ก่อน -->
+    <script src="script/pageConfig.js"></script>
+    <!-- โหลด userDataManager.js -->
+    <script src="script/userDataManager.js"></script>
+    <!-- โหลด script.js -->
     <script src="script/script.js"></script>
-    <script>
-        fetch('loader.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('loader-container').innerHTML = html;
-                // รอ 3 วินาทีแล้วซ่อน loader และแสดง main-container
-                setTimeout(() => {
-                    document.getElementById('loader-container').style.display = 'none';
-                    document.querySelector('.main-container').style.display = '';
-                }, 1500);
-            });
-    </script>
+    <!-- โหลด control-button.js -->
+    <script src="script/control-button.js"></script>
+    <!-- โหลด filebase.js ทีหลัง -->
+    <script src="script/filebase.js"></script>
 </body>
 
 </html>

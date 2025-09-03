@@ -119,7 +119,8 @@
                 <div class="card mb-3 rounded-4 shadow-sm">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2">
-                            <img src="https://github.com/JacketJK/image/blob/main/user-2.png?raw=true" alt="user" class="rounded-circle me-2" width="40" height="40">
+                            <img src="https://github.com/JacketJK/image/blob/main/user-2.png?raw=true" alt="user"
+                                class="rounded-circle me-2" width="40" height="40">
                             <div class="font-size-14">
                                 <span class="fw-semibold">คุณกวินทา</span>
                                 <span class="text-secondary fw-light font-size-12 ms-1">2 นาทีที่แล้ว</span>
@@ -129,7 +130,8 @@
                             <p class="mb-0">ไฟในห้องเรียนดับบ่อยมากครับ รบกวนช่วยตรวจสอบด้วย</p>
                         </div>
                         <div class="mb-2">
-                            <img src="asset/banners/banner2.png" alt="problem" class="rounded-3 w-100" style="max-height: 250px; object-fit: cover;">
+                            <img src="asset/banners/banner2.png" alt="problem" class="rounded-3 w-100"
+                                style="max-height: 250px; object-fit: cover;">
                         </div>
                         <!-- ปุ่มความรู้สึกแบบเฟซบุค -->
                         <div class="d-flex align-items-center mt-2">
@@ -162,7 +164,8 @@
                 <div class="card mb-3 rounded-4 shadow-sm">
                     <div class="card-body">
                         <div class="d-flex align-items-center mb-2">
-                            <img src="https://github.com/JacketJK/image/blob/main/user-2.png?raw=true" alt="user" class="rounded-circle me-2" width="40" height="40">
+                            <img src="https://github.com/JacketJK/image/blob/main/user-2.png?raw=true" alt="user"
+                                class="rounded-circle me-2" width="40" height="40">
                             <div class="font-size-14">
                                 <span class="fw-semibold">คุณกวินทา</span>
                                 <span class="text-secondary fw-light font-size-12 ms-1">2 นาทีที่แล้ว</span>
@@ -172,7 +175,8 @@
                             <p class="mb-0">ไฟในห้องเรียนดับบ่อยมากครับ รบกวนช่วยตรวจสอบด้วย</p>
                         </div>
                         <div class="mb-2">
-                            <img src="asset/banners/banner4.png" alt="problem" class="rounded-3 w-100" style="max-height: 250px; object-fit: cover;">
+                            <img src="asset/banners/banner4.png" alt="problem" class="rounded-3 w-100"
+                                style="max-height: 250px; object-fit: cover;">
                         </div>
                         <!-- ปุ่มความรู้สึกแบบเฟซบุค -->
                         <div class="d-flex align-items-center mt-2">
@@ -218,68 +222,79 @@
         <div id="control-button-space"></div>
     </div>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script>
+        // โหลด loader.html มาแสดง
+        fetch('loader.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('loader-container').innerHTML = html;
+                // รอ 3 วินาทีแล้วซ่อน loader และแสดง main-container
+                setTimeout(() => {
+                    document.getElementById('loader-container').style.display = 'none';
+                    document.querySelector('.main-container').style.display = '';
+                }, 1500);
+            });
 
-<!-- CDN liff -->
-<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<!-- CDN JQuery -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        const bannerImages = [
+            'asset/banners/banner1.jpg',
+            'asset/banners/banner2.png',
+            'asset/banners/banner3.jpg',
+            'asset/banners/banner4.png',
+            'asset/banners/banner5.png',
+            'asset/banners/banner6.jpg',
+            'asset/banners/banner7.jpg',
+        ];
 
-<!-- Bootstrap 5.3 JS Bundle -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+        const carouselInner = document.querySelector('#mainBannerCarousel .carousel-inner');
+        const carouselIndicators = document.querySelector('#mainBannerCarousel .carousel-indicators');
 
-<script src="script/control-button.js"></script>
-<script src="script/script.js"></script>
-<script>
-    // โหลด loader.html มาแสดง
-    fetch('loader.html')
-        .then(response => response.text())
-        .then(html => {
-            document.getElementById('loader-container').innerHTML = html;
-            // รอ 3 วินาทีแล้วซ่อน loader และแสดง main-container
-            setTimeout(() => {
-                document.getElementById('loader-container').style.display = 'none';
-                document.querySelector('.main-container').style.display = '';
-            }, 1500);
-        });
+        bannerImages.forEach((src, idx) => {
+            // สร้าง carousel item
+            const item = document.createElement('div');
+            item.className = 'carousel-item' + (idx === 0 ? ' active' : '');
+            item.innerHTML = `<img src="${src}" class="d-block w-100" alt="banner${idx + 1}">`;
+            item.style.height = '180px';
+            item.style.objectFit = 'cover';
+            carouselInner.appendChild(item);
 
-    const bannerImages = [
-        'asset/banners/banner1.jpg',
-        'asset/banners/banner2.png',
-        'asset/banners/banner3.jpg',
-        'asset/banners/banner4.png',
-        'asset/banners/banner5.png',
-        'asset/banners/banner6.jpg',
-        'asset/banners/banner7.jpg',
-    ];
+            // สร้าง indicator
+            const indicator = document.createElement('button');
+            indicator.type = 'button';
+            indicator.setAttribute('data-bs-target', '#mainBannerCarousel');
+            indicator.setAttribute('data-bs-slide-to', idx);
+            if (idx === 0) indicator.className = 'active';
+            indicator.setAttribute('aria-current', idx === 0 ? 'true' : 'false');
+            indicator.setAttribute('aria-label', `Slide ${idx + 1}`);
+            carouselIndicators.appendChild(indicator);
+        });    
+    </script>
+    <!-- LoadIcon -->
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
-    const carouselInner = document.querySelector('#mainBannerCarousel .carousel-inner');
-    const carouselIndicators = document.querySelector('#mainBannerCarousel .carousel-indicators');
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
-    bannerImages.forEach((src, idx) => {
-        // สร้าง carousel item
-        const item = document.createElement('div');
-        item.className = 'carousel-item' + (idx === 0 ? ' active' : '');
-        item.innerHTML = `<img src="${src}" class="d-block w-100" alt="banner${idx + 1}">`;
-        item.style.height = '180px';
-        item.style.objectFit = 'cover';
-        carouselInner.appendChild(item);
+    <!-- CDN liff -->
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+    <!-- CDN JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-        // สร้าง indicator
-        const indicator = document.createElement('button');
-        indicator.type = 'button';
-        indicator.setAttribute('data-bs-target', '#mainBannerCarousel');
-        indicator.setAttribute('data-bs-slide-to', idx);
-        if (idx === 0) indicator.className = 'active';
-        indicator.setAttribute('aria-current', idx === 0 ? 'true' : 'false');
-        indicator.setAttribute('aria-label', `Slide ${idx + 1}`);
-        carouselIndicators.appendChild(indicator);
-    });    
-</script>
+    <!-- Bootstrap 5.3 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 
+    <!-- โหลด pageConfig.js ก่อน -->
+    <script src="script/pageConfig.js"></script>
+    <!-- โหลด userDataManager.js -->
+    <script src="script/userDataManager.js"></script>
+    <!-- โหลด script.js -->
+    <script src="script/script.js"></script>
+    <!-- โหลด control-button.js -->
+    <script src="script/control-button.js"></script>
+    <!-- โหลด filebase.js ทีหลัง -->
+    <script src="script/filebase.js"></script>
 </body>
+
 </html>
