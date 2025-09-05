@@ -213,7 +213,7 @@ if (registrationForm) {
             displayName: window.lineUser.lineProfile.displayName,
             timestamp: Date.now(),
         };
-        showLoader(3000); 
+        showLoader(3000);
         regRef.set(userData)
             .then(() => {
                 window.globalUserData = userData;
@@ -237,14 +237,99 @@ function getCurrentUser() {
 
 window.getCurrentUser = getCurrentUser;
 
-async function getCollectionCoupon(lineUserId) {
-    try {
-        const regRef = await db.collection("coupons").doc(lineUserId);
-        const snapshot = await regRef.get();
 
-        return snapshot.data();
-    } catch (error) {
-        console.error("Error fetching coupons: ", error);
-        throw error;
+async function confirmReport(e) {
+    e.preventDefault();
+
+    const topic = document.getElementById("issueTopic").value.trim();
+    const detail = document.getElementById("issueDetail").value.trim();
+    const type = document.getElementById("issueType").value.trim();
+    const position = document.getElementById("issuePosition").value.trim();
+    const positionDetail = document.getElementById("issueDetailmore").value.trim();
+    const fileInput = document.getElementById("issueFile");
+    const files = fileInput.files;
+
+    if (!topic || !detail || !type || !position) {
+        toastAlert(3, "กรุณากรอกข้อมูลให้ครบ");
+        return;
     }
+    if (!window.globalUserData || !window.globalUserData.lineUserId) {
+        toastAlert(0, "ไม่พบข้อมูลผู้ใช้ กรุณาเข้าสู่ระบบผ่าน LINE อีกครั้ง");
+        return;
+    }
+
+    // ✅ Use lineUserId as the main document and save the issue in a subcollection.
+    const userDocRef = db.collection("reports").doc(window.globalUserData.lineUserId);
+    const newIssueRef = userDocRef.collection("issues").doc(); // autoId for each issue
+
+    const now = new Date();
+
+    // ดึงปี เดือน วัน ชั่วโมง นาที
+    const year = now.getFullYear(); // 2025
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // 09
+    const day = String(now.getDate()).padStart(2, '0'); // 06
+    const hours = String(now.getHours()).padStart(2, '0'); // 00
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    const reportData = {
+        issueId: `KHANU${year}${month}${day}${hours}${minutes}`,
+        topic,
+        detail,
+        type,
+        position,
+        positionDetail,
+        files: [],
+        lineUserId: window.globalUserData.lineUserId,
+        memberId: window.globalUserData.memberId || "",
+        name: window.globalUserData.name || "",
+        surname: window.globalUserData.surname || "",
+        email: window.globalUserData.email || "",
+        phone: window.globalUserData.phone || "",
+        status: "รอดำเนินการ",
+        timestamp: Date.now(),
+    };
+
+    const uploadAndSaveReport = async () => {
+        if (files.length > 0) {
+            // อัปโหลดไฟล์ไปที่ Cloudinary แทน Firebase Storage
+            const uploadPromises = [];
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', 'KhanuNotify'); // ตั้งค่า upload preset ของคุณใน Cloudinary
+
+                uploadPromises.push(
+                    fetch('https://api.cloudinary.com/v1_1/ddhbxcyx7/image/upload', {
+                        method: 'POST',
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            return {
+                                fileName: file.name,
+                                fileUrl: data.secure_url
+                            };
+                        })
+                );
+            }
+
+            const uploadedFiles = await Promise.all(uploadPromises);
+            reportData.files = uploadedFiles;
+        }
+
+        // ส่วนนี้ยังคงเหมือนเดิม
+        await newIssueRef.set(reportData);
+
+        toastAlert(1, "ส่งรายงานสำเร็จ");
+        document.getElementById("reportForm").reset();
+        window.location.href = "tracking.html";
+    };
+
+    showLoader(3000);
+    uploadAndSaveReport().catch((error) => {
+        toastAlert(0, "เกิดข้อผิดพลาด: " + error.message);
+        console.error("Upload and save failed:", error); // เพิ่ม console.error เพื่อดูรายละเอียด
+    });
 }

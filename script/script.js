@@ -93,3 +93,35 @@ const showLoader = (delay = 3000) => {
     }, delay);
 
 }
+
+const getPositionbtn = () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        toastAlert(0, "Geolocation is not supported by this browser.");
+    }
+};
+
+const showPosition = (position) => {
+    const latitude = position.coords.latitude.toFixed(9);
+    const longitude = position.coords.longitude.toFixed(9);
+    document.getElementById("issuePosition").value = `${latitude}, ${longitude}`;
+    toastAlert(1, "พิกัดถูกระบุเรียบร้อยแล้ว");
+};
+
+const showError = (error) => {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            toastAlert(0, "User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            toastAlert(0, "Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            toastAlert(0, "The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            toastAlert(0, "An unknown error occurred.");
+            break;
+    }
+};

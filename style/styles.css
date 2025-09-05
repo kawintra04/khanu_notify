@@ -58,6 +58,16 @@ body::-webkit-scrollbar {
     }
 }
 
+.custom-tooltip {
+    --bs-tooltip-bg: #8800b2;
+    --bs-tooltip-color: #fff;
+    font-family: 'Prompt', sans-serif;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
 .loader {
     background: linear-gradient(to bottom, #8800b2, #fff);
     min-height: 100vh;
@@ -481,6 +491,11 @@ a {
     color: #ffffff;
 }
 
+.bg-gradient-with {
+    background: linear-gradient(135deg, #8800b2 0%, #3b0a5a 100%);
+    color: #ffffff;
+}
+
 .modal {
     backdrop-filter: blur(4px);
     border: none;
@@ -683,4 +698,14 @@ a {
 .gradient-red {
     background: rgb(240, 82, 79);
     background: linear-gradient(130deg, rgba(240, 82, 79, 1) 0%, rgba(99, 4, 27, 1) 100%) !important;
+}
+
+.bg-class-vl {
+    background-color: #cfc4fd86;
+}
+
+.badge-report {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
 }
