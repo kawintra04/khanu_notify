@@ -207,6 +207,19 @@ const receiveIssue = async (userId, docId) => {
                 .collection("issues")
                 .doc(docId);
 
+            const docSnap = await issueRef.get();
+            if (!docSnap.exists) {
+                toastAlert(3, "ไม่พบข้อมูลปัญหานี้");
+                return;
+            }
+            const issueData = docSnap.data();
+            const topic = issueData.topic || "ไม่มีหัวข้อ";
+
+            await sendLineMessageGAS(
+                userId,
+                `ปัญหาที่คุณแจ้ง "${topic}" อยู่ระหว่างดำเนินการแก้ไข 🔄️`
+            );
+
             await issueRef.update({ status: "ดำเนินการ" });
 
             toastAlert(1, "รับเรื่องแจ้งปัญหาเรียบร้อยแล้ว");
@@ -222,6 +235,7 @@ const closedjobIssue = async (userId, docId) => {
     const Modal = new bootstrap.Modal(document.getElementById('closedjobReportModal'));
     Modal.show();
     const confirmBtn = document.getElementById('closedjobReportConfirmBtn');
+
     confirmBtn.onclick = async () => {
         Modal.hide();
         showLoader(2000);
@@ -231,18 +245,30 @@ const closedjobIssue = async (userId, docId) => {
                 .collection("issues")
                 .doc(docId);
 
+            const docSnap = await issueRef.get();
+            if (!docSnap.exists) {
+                toastAlert(3, "ไม่พบข้อมูลปัญหานี้");
+                return;
+            }
+            const issueData = docSnap.data();
+            const topic = issueData.topic || "ไม่มีหัวข้อ";
+
+            await sendLineMessageGAS(
+                userId,
+                `ปัญหาที่คุณแจ้ง "${topic}" ได้รับการแก้ไขเรียบร้อยแล้ว ✅`
+            );
+
             await issueRef.update({ status: "ดำเนินการเสร็จสิ้น" });
 
-            await sendLineMessage(userId, "ปัญหาที่คุณแจ้งได้รับการแก้ไขเรียบร้อยแล้ว ✅");
-            
             toastAlert(1, "แก้ปัญหาเรียบร้อยแล้ว");
             getDataAllCheckReport();
         } catch (error) {
             console.error("Error updating document: ", error);
             toastAlert(3, "เกิดข้อผิดพลาดในการอัปเดต");
         }
-    }
+    };
 };
+
 
 const cancelIssue = async (userId, docId) => {
     const Modal = new bootstrap.Modal(document.getElementById('cancelReportModal'));
@@ -258,6 +284,19 @@ const cancelIssue = async (userId, docId) => {
                 .collection("issues")
                 .doc(docId);
 
+            const docSnap = await issueRef.get();
+            if (!docSnap.exists) {
+                toastAlert(3, "ไม่พบข้อมูลปัญหานี้");
+                return;
+            }
+            const issueData = docSnap.data();
+            const topic = issueData.topic || "ไม่มีหัวข้อ";
+
+            await sendLineMessageGAS(
+                userId,
+                `ปัญหาที่คุณแจ้ง "${topic}" ถูกยกเลิก ❌`
+            );
+
             await issueRef.update({ status: "ยกเลิก" });
 
             toastAlert(2, "ยกเลิกการแจ้งปัญหาเรียบร้อยแล้ว");
@@ -269,33 +308,16 @@ const cancelIssue = async (userId, docId) => {
     }
 };
 
-// const fetch = require("node-fetch");
+async function sendLineMessageGAS(userId, message) {
+    const url = "https://script.google.com/macros/s/AKfycbytaRUK_2W_AnkObBJ5t4cDQwLuT4qRYA6fBWvmR73Io8Y6cG7daUOErmfVJaxeFpEd/exec";
 
-async function sendLineMessage(userId, message) {
-    const accessToken = "qWmUyjMcTQFSJEjQshw9as+M1qOgw6MTisIiU9oFunmIMhXkzwAevZXm69dBd55jj2qFX6ooiVlgEPl1Xk612TdMsFSCizkRaR3rh+KEgFXjeBd/o0oeivGGuOOt2Cc240vekLWz0rDgEWRs3u++QAdB04t89/1O/w1cDnyilFU=";
+    const fullUrl = `${url}?userId=${encodeURIComponent(userId)}&message=${encodeURIComponent(message)}`;
 
-    const body = {
-        to: userId,
-        messages: [
-            {
-                type: "text",
-                text: message
-            }
-        ]
-    };
-
-    const response = await fetch("https://api.line.me/v2/bot/message/push", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${accessToken}`
-        },
-        body: JSON.stringify(body)
-    });
-
-    if (!response.ok) {
-        console.error("Error sending LINE message:", await response.text());
-    } else {
-        console.log("Message sent to", userId);
+    try {
+        const response = await fetch(fullUrl, { method: "GET" });
+        const result = await response.text();
+        // console.log("GAS response:", result);
+    } catch (error) {
+        console.error("Error sending message:", error);
     }
 }
