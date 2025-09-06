@@ -1,17 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    liff.init({ liffId: "2008047817-Oldmjw7P" })
-        .then(() => {
-            if (!liff.isLoggedIn()) {
-                liff.login();
-            } else {
-                getReportData();
-            }
-        })
-        .catch(err => {
-            console.error('LIFF Initialization failed ', err);
-        });
-});
-
 const getReportData = async () => {
     const countingText = document.getElementById('countReport');
 
@@ -30,6 +16,8 @@ const getReportData = async () => {
         countingText.textContent = "0"; 
     }
 };
+
+getReportData();
 
 const getLevelSystem = async (lineUserId) => {
     const checkreportContainer = document.getElementById('checkreportContainer');

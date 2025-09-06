@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!liff.isLoggedIn()) {
                 liff.login();
             } else {
-                getDataAllReport();
             }
         })
         .catch(err => {
@@ -59,6 +58,8 @@ async function getDataAllReport() {
         console.error("Error getting documents: ", error);
     }
 }
+
+getDataAllReport();
 
 const getissuelist = (snapshot) => {
     const issueList = document.getElementById('issue-list');
