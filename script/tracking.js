@@ -1,16 +1,3 @@
-document.addEventListener("DOMContentLoaded", function () {
-    liff.init({ liffId: "2008047817-Oldmjw7P" })
-        .then(() => {
-            if (!liff.isLoggedIn()) {
-                liff.login();
-            } else {
-            }
-        })
-        .catch(err => {
-            console.error('LIFF Initialization failed ', err);
-        });
-});
-
 async function getDataAllReport() {
     const topic = document.getElementById('total-issues');
     const progress = document.getElementById('in-progress-issues');
