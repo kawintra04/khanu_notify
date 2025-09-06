@@ -25,9 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 const currentPage = window.location.pathname.split("/").pop();
                 if (currentPage === "other.html") {
                     getReportData();
-                }
-                if (currentPage === "tracking.html") {
+                } else if (currentPage === "tracking.html") {
                     getDataAllReport();
+                } else if (window.location.pathname.endsWith("administrator/check-report.html")) {
+                    getDataAllCheckReport();
                 }
             }
         })
