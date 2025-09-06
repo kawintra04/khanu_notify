@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 const currentPage = window.location.pathname.split("/").pop();
                 if (currentPage === "other.html") {
                     getReportData();
+                } else if (currentPage === "index.html") {
+                    getFeedIssues();
                 } else if (currentPage === "tracking.html") {
                     getDataAllReport();
                 } else if (currentPage === "point.html") {
@@ -344,4 +346,136 @@ async function confirmReport(e) {
         toastAlert(0, "เกิดข้อผิดพลาด: " + error.message);
         console.error("Upload and save failed:", error); // เพิ่ม console.error เพื่อดูรายละเอียด
     });
+}
+
+const getFeedIssues = async () => {
+    try {
+        const issuesRef = db.collectionGroup("issues");
+        const issuesSnapshot = await issuesRef.get();
+
+        const allData = [];
+
+        issuesSnapshot.forEach(issueDoc => {
+            const data = issueDoc.data();
+            // Extract userId from the document path
+            const pathParts = issueDoc.ref.path.split("/");
+            const userId = pathParts[1];
+            const status = data.status;
+            
+            allData.push({
+                id: issueDoc.id,
+                userId,
+                issueId: issueDoc.id,
+                ...data
+            });
+        });
+
+        // console.log("All Data:", allData);
+        genaralFeedIssues(allData);
+        return allData;
+    } catch (error) {
+        console.error("Error getting documents: ", error);
+        return [];
+    }
+}
+
+const genaralFeedIssues = async (reports) => {
+    const dataContainer = document.getElementById('feedIssues');
+    dataContainer.innerHTML = "";
+
+    if (!reports) {
+        const noDataItem = document.createElement('div');
+        noDataItem.classList = "text-center text-muted py-4";
+        noDataItem.innerHTML = `
+            <lord-icon
+                src="https://cdn.lordicon.com/msoeawqm.json"
+                trigger="loop"
+                colors="primary:#121331,secondary:#08a88a"
+                style="width:100px;height:100px">
+            </lord-icon>
+            <p class="mt-3 font-size-14">ไม่มีข้อมูลการแจ้งปัญหา</p>
+        `;
+        dataContainer.appendChild(noDataItem);
+        return;
+    }
+
+    reports.sort((a, b) => b.timestamp - a.timestamp);
+
+    reports.forEach(report => {
+        const feedcard = document.createElement('div');
+        feedcard.classList = 'card mb-3 rounded-4 shadow-sm overflow-hidden';
+
+        feedcard.innerHTML = `
+            <div class="card-body ${report.status}">
+                <div class="d-flex align-items-center mb-2">
+                    <img src="${report.profile}" alt="user"
+                        class="rounded-circle me-2" width="40" height="40">
+                    <div class="font-size-14 d-flex flex-column">
+                        <span class="fw-semibold">คุณ${report.name} ${report.surname}</span>
+                        <span class="text-secondary fw-light font-size-12">${timeAgo(report.timestamp)}</span>
+                    </div>
+                </div>
+                <div class="mb-2 font-size-14">
+                    <p class="mb-0">${report.detail}</p>
+                </div>
+                <div class="mb-2">
+                    <img src="https://placehold.co/600x400.png" alt="problem" class="rounded-3 w-100"
+                        style="max-height: 250px; object-fit: cover;">
+                </div>
+                <div class="d-flex align-items-center mt-2">
+                    <div class="btn-group" role="group" aria-label="Feelings">
+                        <button type="button" class="btn btn-light px-2" title="ถูกใจ">
+                            <i class="fa-solid fa-thumbs-up text-primary"></i>
+                        </button>
+                        <button type="button" class="btn btn-light px-2" title="รักเลย">
+                            <i class="fa-solid fa-heart text-danger"></i>
+                        </button>
+                        <button type="button" class="btn btn-light px-2" title="ฮาฮา">
+                            <i class="fa-solid fa-face-laugh text-warning"></i>
+                        </button>
+                        <button type="button" class="btn btn-light px-2" title="ว้าว">
+                            <i class="fa-solid fa-face-surprise text-info"></i>
+                        </button>
+                        <button type="button" class="btn btn-light px-2" title="เศร้า">
+                            <i class="fa-solid fa-face-sad-tear text-secondary"></i>
+                        </button>
+                        <button type="button" class="btn btn-light px-2" title="โกรธ">
+                            <i class="fa-solid fa-face-angry text-danger"></i>
+                        </button>
+                    </div>
+                    <span class="ms-2 font-size-12 text-secondary">ถูกใจ 5 คน</span>
+                </div>
+            </div>
+        `;
+        dataContainer.appendChild(feedcard);
+    });
+};
+
+function timeAgo(timestamp) {
+    const now = new Date();
+    const timePost = new Date(timestamp);
+    const diffMs = now - timePost; // ผลต่างเวลาเป็นมิลลิวินาที
+
+    const diffSeconds = Math.floor(diffMs / 1000);
+    const diffMinutes = Math.floor(diffSeconds / 60);
+    const diffHours = Math.floor(diffMinutes / 60);
+    const diffDays = Math.floor(diffHours / 24);
+
+    if (diffSeconds < 60) {
+        return `${diffSeconds} วินาทีที่แล้ว`;
+    } else if (diffMinutes < 60) {
+        return `${diffMinutes} นาทีที่แล้ว`;
+    } else if (diffHours < 24) {
+        return `${diffHours} ชั่วโมงที่แล้ว`;
+    } else if (diffDays < 30) {
+        return `${diffDays} วันที่แล้ว`;
+    } else {
+        return timePost.toLocaleDateString('th-TH', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
 }

@@ -61,6 +61,22 @@ function renderReports(reports, page = 1) {
     reportList.innerHTML = ''; // เคลียร์เก่า
     currentPage = page;
 
+    if (!reports) {
+        const noDataItem = document.createElement('div');
+        noDataItem.classList = "text-center text-muted py-4";
+        noDataItem.innerHTML = `
+            <lord-icon
+                src="https://cdn.lordicon.com/msoeawqm.json"
+                trigger="loop"
+                colors="primary:#121331,secondary:#08a88a"
+                style="width:100px;height:100px">
+            </lord-icon>
+            <p class="mt-3 font-size-14">ไม่มีข้อมูลการแจ้งปัญหา</p>
+        `;
+        reportList.appendChild(noDataItem);
+        return;
+    }
+
     reports.sort((a, b) => b.timestamp - a.timestamp);
 
     const start = (page - 1) * itemsPerPage;

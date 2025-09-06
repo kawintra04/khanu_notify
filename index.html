@@ -110,101 +110,103 @@
                 </div>
             </div>
 
-            <div class="container-fluid p-2 bg-white rounded-4" style="margin-top: 40px; min-height: 550px;">
+            <div class="container-fluid p-2 bg-white rounded-4" style="margin-top: 40px;">
                 <div class="mt-2 mb-4">
                     <span class="rounded-pill bg-violet font-size-12 text-white"
                         style="padding: 10px 16px;">การแจ้งปัญหาภายในโรงเรียน</span>
                 </div>
-                <!-- ฟีลปัญหา -->
-                <div class="card mb-3 rounded-4 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="https://github.com/JacketJK/image/blob/main/user-2.png?raw=true" alt="user"
-                                class="rounded-circle me-2" width="40" height="40">
-                            <div class="font-size-14">
-                                <span class="fw-semibold">คุณกวินทา</span>
-                                <span class="text-secondary fw-light font-size-12 ms-1">2 นาทีที่แล้ว</span>
-                            </div>
-                        </div>
-                        <div class="mb-2 font-size-14">
-                            <p class="mb-0">ไฟในห้องเรียนดับบ่อยมากครับ รบกวนช่วยตรวจสอบด้วย</p>
-                        </div>
-                        <div class="mb-2">
-                            <img src="asset/banners/banner2.png" alt="problem" class="rounded-3 w-100"
-                                style="max-height: 250px; object-fit: cover;">
-                        </div>
-                        <!-- ปุ่มความรู้สึกแบบเฟซบุค -->
-                        <div class="d-flex align-items-center mt-2">
-                            <div class="btn-group" role="group" aria-label="Feelings">
-                                <button type="button" class="btn btn-light px-2" title="ถูกใจ">
-                                    <i class="fa-solid fa-thumbs-up text-primary"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="รักเลย">
-                                    <i class="fa-solid fa-heart text-danger"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="ฮาฮา">
-                                    <i class="fa-solid fa-face-laugh text-warning"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="ว้าว">
-                                    <i class="fa-solid fa-face-surprise text-info"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="เศร้า">
-                                    <i class="fa-solid fa-face-sad-tear text-secondary"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="โกรธ">
-                                    <i class="fa-solid fa-face-angry text-danger"></i>
-                                </button>
-                            </div>
-                            <span class="ms-2 font-size-12 text-secondary">ถูกใจ 5 คน</span>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- ฟีลปัญหาแบบเฟซบุค -->
-                <div class="card mb-3 rounded-4 shadow-sm">
-                    <div class="card-body">
-                        <div class="d-flex align-items-center mb-2">
-                            <img src="https://github.com/JacketJK/image/blob/main/user-2.png?raw=true" alt="user"
-                                class="rounded-circle me-2" width="40" height="40">
-                            <div class="font-size-14">
-                                <span class="fw-semibold">คุณกวินทา</span>
-                                <span class="text-secondary fw-light font-size-12 ms-1">2 นาทีที่แล้ว</span>
+                <div id="feedIssues" class="overflow-y-auto position-relative" style="height: 650px;">
+                    <!-- ฟีลปัญหา -->
+                    <div class="card mb-3 rounded-4 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="https://github.com/JacketJK/image/blob/main/user-2.png?raw=true" alt="user"
+                                    class="rounded-circle me-2" width="40" height="40">
+                                <div class="font-size-14">
+                                    <span class="fw-semibold">คุณกวินทา</span>
+                                    <span class="text-secondary fw-light font-size-12 ms-1">2 นาทีที่แล้ว</span>
+                                </div>
+                            </div>
+                            <div class="mb-2 font-size-14">
+                                <p class="mb-0">ไฟในห้องเรียนดับบ่อยมากครับ รบกวนช่วยตรวจสอบด้วย</p>
+                            </div>
+                            <div class="mb-2">
+                                <img src="asset/banners/banner2.png" alt="problem" class="rounded-3 w-100"
+                                    style="max-height: 250px; object-fit: cover;">
+                            </div>
+                            <!-- ปุ่มความรู้สึกแบบเฟซบุค -->
+                            <div class="d-flex align-items-center mt-2">
+                                <div class="btn-group" role="group" aria-label="Feelings">
+                                    <button type="button" class="btn btn-light px-2" title="ถูกใจ">
+                                        <i class="fa-solid fa-thumbs-up text-primary"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="รักเลย">
+                                        <i class="fa-solid fa-heart text-danger"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="ฮาฮา">
+                                        <i class="fa-solid fa-face-laugh text-warning"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="ว้าว">
+                                        <i class="fa-solid fa-face-surprise text-info"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="เศร้า">
+                                        <i class="fa-solid fa-face-sad-tear text-secondary"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="โกรธ">
+                                        <i class="fa-solid fa-face-angry text-danger"></i>
+                                    </button>
+                                </div>
+                                <span class="ms-2 font-size-12 text-secondary">ถูกใจ 5 คน</span>
                             </div>
                         </div>
-                        <div class="mb-2 font-size-14">
-                            <p class="mb-0">ไฟในห้องเรียนดับบ่อยมากครับ รบกวนช่วยตรวจสอบด้วย</p>
-                        </div>
-                        <div class="mb-2">
-                            <img src="asset/banners/banner4.png" alt="problem" class="rounded-3 w-100"
-                                style="max-height: 250px; object-fit: cover;">
-                        </div>
-                        <!-- ปุ่มความรู้สึกแบบเฟซบุค -->
-                        <div class="d-flex align-items-center mt-2">
-                            <div class="btn-group" role="group" aria-label="Feelings">
-                                <button type="button" class="btn btn-light px-2" title="ถูกใจ">
-                                    <i class="fa-solid fa-thumbs-up text-primary"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="รักเลย">
-                                    <i class="fa-solid fa-heart text-danger"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="ฮาฮา">
-                                    <i class="fa-solid fa-face-laugh text-warning"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="ว้าว">
-                                    <i class="fa-solid fa-face-surprise text-info"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="เศร้า">
-                                    <i class="fa-solid fa-face-sad-tear text-secondary"></i>
-                                </button>
-                                <button type="button" class="btn btn-light px-2" title="โกรธ">
-                                    <i class="fa-solid fa-face-angry text-danger"></i>
-                                </button>
+                    </div>
+
+                    <!-- ฟีลปัญหาแบบเฟซบุค -->
+                    <div class="card mb-3 rounded-4 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-2">
+                                <img src="https://github.com/JacketJK/image/blob/main/user-2.png?raw=true" alt="user"
+                                    class="rounded-circle me-2" width="40" height="40">
+                                <div class="font-size-14">
+                                    <span class="fw-semibold">คุณกวินทา</span>
+                                    <span class="text-secondary fw-light font-size-12 ms-1">2 นาทีที่แล้ว</span>
+                                </div>
                             </div>
-                            <span class="ms-2 font-size-12 text-secondary">ถูกใจ 5 คน</span>
+                            <div class="mb-2 font-size-14">
+                                <p class="mb-0">ไฟในห้องเรียนดับบ่อยมากครับ รบกวนช่วยตรวจสอบด้วย</p>
+                            </div>
+                            <div class="mb-2">
+                                <img src="asset/banners/banner4.png" alt="problem" class="rounded-3 w-100"
+                                    style="max-height: 250px; object-fit: cover;">
+                            </div>
+                            <!-- ปุ่มความรู้สึกแบบเฟซบุค -->
+                            <div class="d-flex align-items-center mt-2">
+                                <div class="btn-group" role="group" aria-label="Feelings">
+                                    <button type="button" class="btn btn-light px-2" title="ถูกใจ">
+                                        <i class="fa-solid fa-thumbs-up text-primary"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="รักเลย">
+                                        <i class="fa-solid fa-heart text-danger"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="ฮาฮา">
+                                        <i class="fa-solid fa-face-laugh text-warning"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="ว้าว">
+                                        <i class="fa-solid fa-face-surprise text-info"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="เศร้า">
+                                        <i class="fa-solid fa-face-sad-tear text-secondary"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-light px-2" title="โกรธ">
+                                        <i class="fa-solid fa-face-angry text-danger"></i>
+                                    </button>
+                                </div>
+                                <span class="ms-2 font-size-12 text-secondary">ถูกใจ 5 คน</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- เพิ่มฟีลปัญหาอื่นๆ ได้ตามต้องการ -->
             </div>
 
             <div id="iamgesBgbanner" class="container-fluid rounded-4 p-0 mb-5 mt-3 overflow-hidden">

@@ -800,3 +800,63 @@ a {
         }
     }
 }
+
+#feedIssues .card-body.รอดำเนินการ::before {
+    content: "รอรับเรื่อง";
+    position: absolute;
+    top: 10px;
+    right: -40px;       
+    transform: rotate(45deg);  
+    background: #8800b2;  
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 40px;  
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+#feedIssues .card-body.ดำเนินการ::before {
+    content: "ดำเนินการ";
+    position: absolute;
+    top: 10px;
+    right: -40px;       
+    transform: rotate(45deg);  
+    background: #ff9800;  
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 40px;  
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+#feedIssues .card-body.ยกเลิก::before {
+    content: "ยกเลิก";
+    position: absolute;
+    top: 10px;
+    right: -40px;       
+    transform: rotate(45deg);  
+    background: #d30a0a;  
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 40px;  
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}   
+
+#feedIssues .card-body.ดำเนินการเสร็จสิ้น::before {
+    content: "เสร็จสิ้น";
+    position: absolute;
+    top: 10px;
+    right: -40px;       
+    transform: rotate(45deg);  
+    background: #43c06d;  
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 40px;  
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
