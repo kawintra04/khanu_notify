@@ -570,6 +570,29 @@ a {
     font-weight: 500;
 }
 
+.btn-outline-green {
+    border: 1px solid #43c06d;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #43c06d;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.btn-outline-green:hover {
+    border: 1px solid #197538 !important;
+    background-color: #13642e !important;
+    color: #ffffff !important;
+}
+
+.btn-check:checked+.btn-outline-green {
+    border: 1px solid rgb(37, 3, 58) !important;
+    background-color: #43c06d !important;
+    color: #ffffff !important;
+    font-weight: 500;
+}
+
+
 .background-image::after {
     content: "";
     position: absolute;
@@ -712,31 +735,68 @@ a {
 
 .report-card {
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 15px;
-    border-left: 5px solid;
+    border-left: 8px solid;
+}
+
+.report-card.status-ดำเนินการ {
+    border-color: #ffc107;
+    background-color: #ffc10713;
 }
 
 .report-card.status-รอดำเนินการ {
-    border-color: #ffc107;
+    border-color: #53036b;
+    background-color: #53036b1c;
 }
 
 .report-card.status-ยกเลิก {
     border-color: #dc3545;
+    background-color: #dc35461f;
 }
 
-.report-card h3 {
+.report-card.status-ดำเนินการเสร็จสิ้น {
+    border-color: #43c06d;
+    background-color: #43c06d27;
+}
+
+.report-card h5 {
     margin-top: 0;
     color: #333;
+    font-size: 17px;
 }
 
 .report-card p {
     margin: 5px 0;
+    font-size: 14px;
     color: #666;
 }
 
 .report-card strong {
     color: #333;
+    font-weight: 500;
+
+}
+.text-p-color {
+    color: #666;
+}
+
+#pagination {
+    display: flex;
+    justify-content: center;
+
+    button {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        i {
+            font-size: 10px;
+        }
+    }
 }

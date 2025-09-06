@@ -294,6 +294,7 @@ async function confirmReport(e) {
         surname: window.globalUserData.surname || "",
         email: window.globalUserData.email || "",
         phone: window.globalUserData.phone || "",
+        profile: window.globalUserData.pictureUrl || "",
         status: "รอดำเนินการ",
         timestamp: Date.now(),
     };
