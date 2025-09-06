@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     getReportData();
                 } else if (currentPage === "tracking.html") {
                     getDataAllReport();
+                } else if (currentPage === "point.html") {
+                    getDataPoint();
                 } else if (window.location.pathname.endsWith("administrator/check-report.html")) {
                     getDataAllCheckReport();
                 }
