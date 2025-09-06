@@ -61,6 +61,8 @@ function renderReports(reports, page = 1) {
     reportList.innerHTML = ''; // เคลียร์เก่า
     currentPage = page;
 
+    reports.sort((a, b) => b.timestamp - a.timestamp);
+
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const paginatedReports = reports.slice(start, end);
