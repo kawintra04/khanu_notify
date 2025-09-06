@@ -17,8 +17,6 @@ const getReportData = async () => {
     }
 };
 
-getReportData();
-
 const getLevelSystem = async (lineUserId) => {
     const checkreportContainer = document.getElementById('checkreportContainer');
     try {

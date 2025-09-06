@@ -46,8 +46,6 @@ async function getDataAllReport() {
     }
 }
 
-getDataAllReport();
-
 const getissuelist = (snapshot) => {
     const issueList = document.getElementById('issue-list');
     issueList.innerHTML = '';

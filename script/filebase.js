@@ -21,6 +21,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 liff.login();
             } else {
                 handleLineUser();
+
+                const currentPage = window.location.pathname.split("/").pop();
+                if (currentPage === "other.html") {
+                    getReportData();
+                }
+                if (currentPage === "tracking.html") {
+                    getDataAllReport();
+                }
             }
         })
         .catch(err => {
