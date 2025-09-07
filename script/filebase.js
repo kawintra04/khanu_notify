@@ -305,25 +305,30 @@ async function confirmReport(e) {
 
     const uploadAndSaveReport = async () => {
         if (files.length > 0) {
-            // อัปโหลดไฟล์ไปที่ Cloudinary แทน Firebase Storage
             const uploadPromises = [];
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 const formData = new FormData();
-                formData.append('file', file);
-                formData.append('upload_preset', 'KhanuNotify'); // ตั้งค่า upload preset ของคุณใน Cloudinary
+
+                formData.append("file", file);           // ไฟล์ภาพ
+                formData.append("fileName", file.name);  // ชื่อไฟล์
+                formData.append("folder", "/reports");   // โฟลเดอร์ใน ImageKit (ถ้าอยากจัดหมวดหมู่)
 
                 uploadPromises.push(
-                    fetch('https://api.cloudinary.com/v1_1/ddhbxcyx7/image/upload', {
-                        method: 'POST',
+                    fetch("https://upload.imagekit.io/api/v1/files/upload", {
+                        method: "POST",
+                        headers: {
+                            Authorization: "Basic " + btoa("private_Byxu58PAGW7cKhDfs0J9XgJyYS0=" + ":")
+                            // ห้ามใช้จริงใน production!
+                        },
                         body: formData
                     })
-                        .then(response => response.json())
+                        .then(res => res.json())
                         .then(data => {
                             return {
                                 fileName: file.name,
-                                fileUrl: data.secure_url
+                                fileUrl: data.url   // URL ของไฟล์ที่อัปโหลด
                             };
                         })
                 );
@@ -333,7 +338,7 @@ async function confirmReport(e) {
             reportData.files = uploadedFiles;
         }
 
-        // ส่วนนี้ยังคงเหมือนเดิม
+        // บันทึก Firestore ตามเดิม
         await newIssueRef.set(reportData);
 
         toastAlert(1, "ส่งรายงานสำเร็จ");
@@ -361,7 +366,7 @@ const getFeedIssues = async () => {
             const pathParts = issueDoc.ref.path.split("/");
             const userId = pathParts[1];
             const status = data.status;
-            
+
             allData.push({
                 id: issueDoc.id,
                 userId,
@@ -447,6 +452,7 @@ const genaralFeedIssues = async (reports) => {
                 </div>
             </div>
         `;
+
         dataContainer.appendChild(feedcard);
     });
 };
