@@ -122,6 +122,19 @@ function renderReports(reports, page = 1) {
                             </span>`,
         };
 
+        let fileContainerHtml = "";   // ใช้ let และเริ่มจาก string ว่าง
+        const files = report.files || [];
+
+        if (files.length > 0) {
+            files.forEach(file => {
+                fileContainerHtml += `
+                    <img src="${file.fileUrl}" 
+                        class="rounded-3 clickable-image" 
+                        style="width:40px; height:40px; object-fit:cover; cursor:pointer;">
+                `;
+            });
+        }
+
         reportCard.innerHTML = `
             <div class="d-flex justify-content-between align-items-center">
                 <h5><i class="fa-solid fa-bullhorn"></i> ${report.topic}</h5>
@@ -150,14 +163,26 @@ function renderReports(reports, page = 1) {
             ${report.positionDetail} </a></p>
             <p><strong>ประเภท:</strong> ${typeMap[report.type] || 'ไม่ระบุ'}</p>
             <p><strong>วันที่แจ้ง:</strong> ${formattedDate} น.</p>
-
-            <div class="d-flex justify-content-end mt-2">
+            <div>
+                ${fileContainerHtml}
+            <div>
+            <div class="d-flex justify-content-end w-100 mt-2">            
                 <button class="btn btn-sm btn-outline-check rounded-4 font-size-14 px-3 ${report.status === 'รอดำเนินการ' ? '' : 'd-none'}" onclick="receiveIssue('${report.userId}', '${report.id}')"><i class="fa-regular fa-triple-chevrons-right"></i> รับเรื่อง</button>      
                 <button class="btn btn-sm btn-outline-green rounded-4 font-size-14 px-3 ${report.status === 'ดำเนินการ' ? '' : 'd-none'}" onclick="closedjobIssue('${report.userId}', '${report.id}')"><i class="fa-solid fa-thumbs-up"></i> ปิดงาน</button>   
             </div>
         `;
 
         reportList.appendChild(reportCard);
+    });
+
+    // เพิ่ม event ให้แต่ละภาพ
+    document.querySelectorAll('.clickable-image').forEach(img => {
+        img.addEventListener('click', () => {
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = img.src;
+            const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+            modal.show();
+        });
     });
 
     renderPagination(reports);

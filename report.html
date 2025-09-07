@@ -119,9 +119,8 @@
                                 <i class="fa-solid fa-cloud-upload-alt fa-lg"></i><br><br>
                                 ลากไฟล์วางที่นี่หรือ <span>เลือกไฟล์</span><br>
                             </div>
-                            <div class="file-type-info">ประเภทไฟล์ image/*, application/pdf</div>
-                            <input type="file" class="d-none" accept="image/*,application/pdf" id="issueFile"
-                                name="files" multiple>
+                            <div class="file-type-info">ประเภทไฟล์ image/*,</div>
+                            <input type="file" class="d-none" accept="image/*" id="issueFile" name="files" multiple>
                         </label>
                     </div>
 
@@ -146,7 +145,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content bg-transparent border-0 shadow-none">
                 <div class="modal-body text-center">
-                    <div id="map" class="overflow-hidden rounded-4" style="width: 100%; height: 400px; border-radius: 15px;"></div>
+                    <div id="map" class="overflow-hidden rounded-4"
+                        style="width: 100%; height: 400px; border-radius: 15px;"></div>
 
                     <div class="mt-3 d-flex flex-column justify-content-center gap-2">
                         <!-- ปุ่มใช้ตำแหน่งปัจจุบัน -->
@@ -223,6 +223,38 @@
             }
         };
 
+        const fileInput = document.getElementById("issueFile");
+        const filePreview = document.getElementById("filePreview1");
+
+        // ฟังก์ชันแสดง preview
+        fileInput.addEventListener("change", () => {
+            filePreview.innerHTML = ""; // ล้างค่าเก่า
+            const files = fileInput.files;
+
+            if (files.length > 0) {
+                [...files].forEach(file => {
+                    if (file.type.startsWith("image/")) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const img = document.createElement("img");
+                            img.src = e.target.result;
+                            img.className = "rounded border";
+                            img.style.maxWidth = "120px";
+                            img.style.maxHeight = "120px";
+                            img.style.objectFit = "cover";
+                            filePreview.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        // ถ้าเป็นไฟล์อื่น แสดงชื่อแทน
+                        const div = document.createElement("div");
+                        div.textContent = file.name;
+                        div.className = "text-muted small";
+                        filePreview.appendChild(div);
+                    }
+                });
+            }
+        });
 
     </script>
 

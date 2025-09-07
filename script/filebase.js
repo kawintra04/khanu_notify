@@ -410,6 +410,8 @@ const genaralFeedIssues = async (reports) => {
         const feedcard = document.createElement('div');
         feedcard.classList = 'card mb-3 rounded-4 shadow-sm overflow-hidden';
 
+        const imageUrl = report.files?.[0]?.fileUrl || "https://placehold.co/600x400.png";
+
         feedcard.innerHTML = `
             <div class="card-body ${report.status}">
                 <div class="d-flex align-items-center mb-2">
@@ -424,8 +426,8 @@ const genaralFeedIssues = async (reports) => {
                     <p class="mb-0">${report.detail}</p>
                 </div>
                 <div class="mb-2">
-                    <img src="https://placehold.co/600x400.png" alt="problem" class="rounded-3 w-100"
-                        style="max-height: 250px; object-fit: cover;">
+                    <img src="${imageUrl}" alt="problem" class="rounded-3 w-100"
+     style="max-height: 250px; object-fit: cover;">
                 </div>
                 <div class="d-flex align-items-center mt-2">
                     <div class="btn-group" role="group" aria-label="Feelings">
