@@ -98,8 +98,7 @@ async function handleLineUser() {
                 });
             }
 
-            document.getElementById('point-reward').textContent = allpoint;
-
+            $('.point-reward').text(allpoint);
             $('.userMemberId').text(memberId);
             $('.userProfile').attr('src', window.globalUserData.pictureUrl);
             $('.userName').text("คุณ" + window.globalUserData.name);
@@ -435,7 +434,7 @@ const genaralFeedIssues = async (reports) => {
     const dataContainer = document.getElementById('feedIssues');
     dataContainer.innerHTML = "";
 
-    if (!reports) {
+    if (reports.length == 0) {
         const noDataItem = document.createElement('div');
         noDataItem.classList = "text-center text-muted py-4";
         noDataItem.innerHTML = `

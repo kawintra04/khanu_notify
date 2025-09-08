@@ -43,7 +43,7 @@ const getDataAllCheckReport = async () => {
         progress.textContent = inProgressCount;
         completed.textContent = completedCount;
         withing.textContent = withedCount;
-        // console.log("All Data:", allData);
+        console.log("All Data:", allData);
         renderReports(allData);
         return allData;
     } catch (error) {
@@ -61,7 +61,7 @@ function renderReports(reports, page = 1) {
     reportList.innerHTML = ''; // เคลียร์เก่า
     currentPage = page;
 
-    if (!reports) {
+    if (reports.length == 0) {
         const noDataItem = document.createElement('div');
         noDataItem.classList = "text-center text-muted py-4";
         noDataItem.innerHTML = `
