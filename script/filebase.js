@@ -80,7 +80,7 @@ async function handleLineUser() {
 
             $('.userMemberId').text(memberId);
             $('.userProfile').attr('src', window.globalUserData.pictureUrl);
-            $('.userName').text(window.globalUserData.name);
+            $('.userName').text("คุณ" + window.globalUserData.name);
             $('.userFullname').text(window.globalUserData.name + ' ' + window.globalUserData.surname);
             const rawPhone = window.globalUserData.phone || "";
             const formattedPhone = rawPhone.replace(/^(\d{3})(\d{3})(\d{4})$/, "$1-$2-$3");
@@ -338,8 +338,19 @@ async function confirmReport(e) {
             reportData.files = uploadedFiles;
         }
 
-        // บันทึก Firestore ตามเดิม
-        await newIssueRef.set(reportData);
+        const notify = `มีการแจ้งปัญหา ${reportData.topic}`;
+        const result = await newIssueRef.set(reportData);
+        if (result) {
+            const regRef = db.collection("registrations"); 
+            const snapshot = await regRef.get();
+
+            snapshot.forEach(doc => {
+                console.log(doc.id, " => ", doc.data().level);
+                if (doc.data().level === 'council' || doc.data().level === 'teacher') {
+                    sendLineMessageGAS(doc.id, notify);
+                }
+            });
+        }    
 
         toastAlert(1, "ส่งรายงานสำเร็จ");
         document.getElementById("reportForm").reset();
@@ -352,6 +363,20 @@ async function confirmReport(e) {
         console.error("Upload and save failed:", error); // เพิ่ม console.error เพื่อดูรายละเอียด
     });
 }
+
+const test = async () => {
+    try {
+        const regRef = db.collection("registrations"); // อ้างถึง collection
+        const snapshot = await regRef.get(); // ดึงทุก document ใน collection
+
+        snapshot.forEach(doc => {
+            console.log(doc.id, " => ", doc.data().level);
+        });
+    } catch (error) {
+        console.error("Error getting documents: ", error);
+    }
+};
+
 
 const getFeedIssues = async () => {
     try {
@@ -485,5 +510,20 @@ function timeAgo(timestamp) {
             hour: '2-digit',
             minute: '2-digit'
         });
+    }
+}
+
+
+async function sendLineMessageGAS(userId, message) {
+    const url = "https://script.google.com/macros/s/AKfycbytaRUK_2W_AnkObBJ5t4cDQwLuT4qRYA6fBWvmR73Io8Y6cG7daUOErmfVJaxeFpEd/exec";
+
+    const fullUrl = `${url}?userId=${encodeURIComponent(userId)}&message=${encodeURIComponent(message)}`;
+
+    try {
+        const response = await fetch(fullUrl, { method: "GET" });
+        const result = await response.text();
+        // console.log("GAS response:", result);
+    } catch (error) {
+        console.error("Error sending message:", error);
     }
 }
