@@ -224,7 +224,7 @@ if (registrationForm) {
             }
         }
 
-        if (!name || !surname || !email || !numberphone || !level || !memberId) {
+        if (!name || !surname || !email || !numberphone || !level) {
             toastAlert(3, "กรุณากรอกข้อมูลให้ครบ");
             return;
         }

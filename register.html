@@ -107,13 +107,13 @@
                 </div>
                 <div class="position-relative mb-3">
                     <label for="numberphone" class="form-label">หมายเลขโทรศัพท์</label>
-                    <input type="text" class="form-control rounded-pill font-size-14 form-padding" id="numberphone"
+                    <input type="tel" class="form-control rounded-pill font-size-14 form-padding" id="numberphone"
                         placeholder="กรอกเบอร์โทรศัพท์" maxlength="10" pattern="[0-9]{10}" inputmode="numeric" required>
                     <i class="fa-solid fa-mobile form-icon"></i>
                 </div>
                 <div class="position-relative mb-3">
                     <label for="email" class="form-label">อีเมล</label>
-                    <input type="text" class="form-control rounded-pill font-size-14 form-padding" id="email"
+                    <input type="email" class="form-control rounded-pill font-size-14 form-padding" id="email"
                         placeholder="กรอกอีเมล" required>
                     <i class="fa-solid fa-at form-icon"></i>
                 </div>
@@ -156,14 +156,16 @@
         const toggleStudentId = (isParent) => {
             const studentIDContainer = document.getElementById('studentIDContainer');
             const studentIdInput = document.getElementById('studentId');
+
             if (isParent) {
                 studentIDContainer.style.display = 'none';
-                studentIdInput.removeAttribute('required');
+                studentIdInput.required = false; // ใช้ = แทน ==
             } else {
                 studentIDContainer.style.display = '';
-                studentIdInput.setAttribute('required', 'required');
+                studentIdInput.required = true; // ใช้ = แทน ==
             }
         };
+
     </script>
     <!-- LoadIcon -->
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
