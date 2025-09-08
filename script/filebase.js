@@ -78,6 +78,28 @@ async function handleLineUser() {
                 window.globalUserData.memberId = memberId;
             }
 
+            let allpoint = 0;
+            const reportregRef = db.collection("reports").doc(lineUserId).collection("issues");
+            const reportsnapshot = await reportregRef.get();
+            if (!reportsnapshot.empty) {
+                reportsnapshot.forEach(doc => {
+                    const data = doc.data();
+                    const status = data.status;
+
+                    if (status === 'ดำเนินการเสร็จสิ้น') {
+                        allpoint += 10;
+                    } else if (status === 'ดำเนินการ') {
+                        allpoint += 5;
+                    } else if (status === 'รอดำเนินการ') {
+                        allpoint += 3;
+                    } else if (status === 'ยกเลิก') {
+                        allpoint += 1;
+                    }  
+                });
+            }
+
+            document.getElementById('point-reward').textContent = allpoint;
+
             $('.userMemberId').text(memberId);
             $('.userProfile').attr('src', window.globalUserData.pictureUrl);
             $('.userName').text("คุณ" + window.globalUserData.name);
