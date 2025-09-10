@@ -728,9 +728,10 @@ a {
 }
 
 .badge-report {
-    width: 42px;
-    height: 42px;
     border-radius: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 .report-card {
@@ -801,6 +802,18 @@ a {
     }
 }
 
+.pagination {
+    a {
+        width: 35px;
+        height: 35px;
+        border-radius: 50% !important;
+        margin-right: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }    
+}
+
 #feedIssues .card-body.รอดำเนินการ::before {
     content: "รอรับเรื่อง";
     position: absolute;
@@ -859,4 +872,8 @@ a {
     padding: 4px 40px;  
     text-align: center;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.container-404 {
+    height: 100vh;
 }

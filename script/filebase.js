@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     getDataPoint();
                 } else if (window.location.pathname.endsWith("administrator/check-report.html")) {
                     getDataAllCheckReport();
+                } else if (window.location.pathname.endsWith("administrator/user-manager.html")) {
+                    getDataAllusers();
                 }
             }
         })
@@ -51,6 +53,12 @@ async function handleLineUser() {
         const snapshot = await regRef.get();
         if (snapshot.exists) {
             window.globalUserData = snapshot.data();
+
+            console.log(window.globalUserData)
+            if (window.globalUserData.status == false) {
+                window.location.href = "404-non-load.html";
+                return;
+            }
             notifyUserDataReady(); // แจ้งเตือนว่าข้อมูลผู้ใช้พร้อมใช้งาน
 
             let memberId = window.globalUserData.memberId;

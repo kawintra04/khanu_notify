@@ -34,6 +34,7 @@ const getReportData = async () => {
 
 const getLevelSystem = async (lineUserId) => {
     const checkreportContainer = document.getElementById('checkreportContainer');
+    const userManagerContianer = document.getElementById('userManagerContianer');
     try {
         const regRef = db.collection("registrations").doc(lineUserId);
         const snapshot = await regRef.get();
@@ -42,8 +43,13 @@ const getLevelSystem = async (lineUserId) => {
 
             if (data.level === "student") {
                 checkreportContainer.style.display = 'none';
-            } else {
-                checkreportContainer.style.display = 'block';
+                userManagerContianer.style.display = 'none';
+            } else if (data.level === "council") {
+                checkreportContainer.style.display = '';
+                userManagerContianer.style.display = 'none';
+            } else if (data.level === "teacher") {
+                checkreportContainer.style.display = '';
+                userManagerContianer.style.display = '';
             }
         };
 

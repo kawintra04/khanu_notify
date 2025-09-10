@@ -169,6 +169,7 @@ function renderReports(reports, page = 1) {
             <div class="d-flex justify-content-end w-100 mt-2">            
                 <button class="btn btn-sm btn-outline-check rounded-4 font-size-14 px-3 ${report.status === 'รอดำเนินการ' ? '' : 'd-none'}" onclick="receiveIssue('${report.userId}', '${report.id}')"><i class="fa-regular fa-triple-chevrons-right"></i> รับเรื่อง</button>      
                 <button class="btn btn-sm btn-outline-green rounded-4 font-size-14 px-3 ${report.status === 'ดำเนินการ' ? '' : 'd-none'}" onclick="closedjobIssue('${report.userId}', '${report.id}')"><i class="fa-solid fa-thumbs-up"></i> ปิดงาน</button>   
+                <button class="btn btn-sm btn-outline-danger rounded-4 font-size-14 px-3 ${report.status === 'ยกเลิก' ? '' : 'd-none'}" onclick="deletedIssue('${report.userId}', '${report.id}')"><i class="fa-solid fa-trash-can"></i> ลบทิ้ง</button>   
             </div>
         `;
 
@@ -312,7 +313,6 @@ const closedjobIssue = async (userId, docId) => {
     };
 };
 
-
 const cancelIssue = async (userId, docId) => {
     const Modal = new bootstrap.Modal(document.getElementById('cancelReportModal'));
     Modal.show();
@@ -347,6 +347,46 @@ const cancelIssue = async (userId, docId) => {
         } catch (error) {
             console.error("Error updating document: ", error);
             toastAlert(3, "เกิดข้อผิดพลาดในการอัปเดต");
+        }
+    }
+};
+
+const deletedIssue = async (userId, docId) => {
+    const Modal = new bootstrap.Modal(document.getElementById('deleteReportModal'));
+    Modal.show();
+
+    const confirmBtn = document.getElementById('deleteReportConfirmBtn');
+    confirmBtn.onclick = async () => {
+        Modal.hide();
+        showLoader(2000);
+        try {
+            const issueRef = db.collection("reports")
+                .doc(userId)
+                .collection("issues")
+                .doc(docId);
+
+            const docSnap = await issueRef.get();
+            if (!docSnap.exists) {
+                toastAlert(3, "ไม่พบข้อมูลปัญหานี้");
+                return;
+            }
+
+            const issueData = docSnap.data();
+            const topic = issueData.topic || "ไม่มีหัวข้อ";
+
+            await sendLineMessageGAS(
+                userId,
+                `ปัญหาที่คุณแจ้ง "${topic}" ถูกลบออกจากระบบ ❌`
+            );
+
+            // ลบ document ออกจริง ๆ
+            await issueRef.delete();
+
+            toastAlert(2, "ลบการแจ้งปัญหาเรียบร้อยแล้ว");
+            getDataAllCheckReport();
+        } catch (error) {
+            console.error("Error deleting document: ", error);
+            toastAlert(3, "เกิดข้อผิดพลาดในการลบ");
         }
     }
 };

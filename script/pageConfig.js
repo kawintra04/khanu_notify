@@ -9,6 +9,8 @@ const EXCLUDED_FROM_REDIRECT = [
   'report',           
   'tracking',           
   'other',           
+  'administrator/check-report',           
+  'administrator/user-manager',           
 ];
 
 // หน้าต่างๆ ที่ต้องการให้ redirect ไปหน้า register.html เมื่อยังไม่ได้ลงทะเบียน

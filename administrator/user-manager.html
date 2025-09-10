@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ตรวจสอบการแจ้งปัญหา - Khanu School Notication</title>
+    <title>การจัดการผู้ใช้งาน - Khanu School Notication</title>
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -66,7 +66,7 @@
     </div>
 
     <div class="main-container" style="display: none;">
-        <div  class="p-3 h-100 pb-5 mb-5">
+        <div class="p-3 h-100 pb-5 mb-5">
             <div class="mb-0">
                 <span id="back-button" class="text-white" role="button" onclick="window.history.back();">
                     <i class="fa-solid fa-chevron-left fa-xl"></i>
@@ -75,33 +75,33 @@
             <div class="text-center text-white mb-3">
                 <img src="../asset/icons/logo_khanu512.png" alt="Khanu School Logo" class="mb-2"
                     style="width: 100px; height: 100px;">
-                <h2 class="mb-0">ตรวจสอบการแจ้งปัญหา</h2>
+                <h2 class="mb-0">การจัดการผู้ใช้งาน</h2>
                 <p class="mb-0">โรงเรียนขาณุวิทยา</p>
             </div>
 
             <div class="row text-center mb-3 g-3">
                 <div class="col-6">
-                    <div class="card border-0 shadow rounded-4 p-3 bg-gradient-allissue">
+                    <div class="card border-0 shadow rounded-4 p-3 bg-gradient-with">
                         <div class="row d-flex justify-content-center align-items-center mb-2">
                             <div class="col-4 fs-3 opacity-25">
-                                <i class="fa-solid fa-clipboard-list fa-2xl text-white-50"></i>
+                                <i class="fa-light fa-user-group-simple fa-2xl text-white-50"></i>
                             </div>
                             <div class="col d-flex align-items-center flex-column">
-                                <div class="fw-semibold fs-1" id="total-issues">0</div>
-                                <div class="font-size-14 text-white-50">เรื่องทั้งหมด</div>
+                                <div class="fw-semibold fs-1" id="total-user">0</div>
+                                <div class="font-size-14 text-white-50">ผู้ใช้งานทั้งหมด</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="card border-0 shadow rounded-4 p-3 bg-gradient-with">
+                    <div class="card border-0 shadow rounded-4 p-3 bg-gradient-allissue">
                         <div class="row d-flex justify-content-center align-items-center mb-2">
                             <div class="col-4 fs-3 opacity-50">
-                                <i class="fa-solid fa-business-time fa-2xl text-white-50"></i>
+                                <i class="fa-light fa-screen-users fa-2xl text-white-50"></i>
                             </div>
                             <div class="col d-flex align-items-center flex-column">
-                                <div class="fw-semibold fs-1" id="withed-issues">0</div>
-                                <div class="font-size-14 text-white-50">รอดำเนินการ</div>
+                                <div class="fw-semibold fs-1" id="student-user">0</div>
+                                <div class="font-size-14 text-white-50">นักเรียน</div>
                             </div>
                         </div>
                     </div>
@@ -110,24 +110,24 @@
                     <div class="card border-0 shadow rounded-4 p-3 bg-gradient-process">
                         <div class="row d-flex justify-content-center align-items-center mb-2">
                             <div class="col-4 fs-3 opacity-50">
-                                <i class="fa-solid fa-hammer-brush fa-2xl text-white-50"></i>
+                                <i class="fa-light fa-user-graduate fa-2xl text-white-50"></i>
                             </div>
                             <div class="col d-flex align-items-center flex-column">
-                                <div class="fw-semibold fs-1" id="in-progress-issues">0</div>
-                                <div class="font-size-14 text-dark-50">ดำเนินการ</div>
+                                <div class="fw-semibold fs-1" id="council-user">0</div>
+                                <div class="font-size-14 text-dark-50">สภานักเรียน</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="card border-0 shadow rounded-4 p-3 bg-gradient-success">
+                    <div class="card border-0 shadow rounded-4 p-3 bg-gradient-cencel">
                         <div class="row d-flex justify-content-center align-items-center mb-2">
                             <div class="col-4 fs-3 opacity-50">
-                                <i class="fa-solid fa-thumbs-up fa-2xl text-white-50"></i>
+                                <i class="fa-light fa-user-tie fa-2xl text-white-50"></i>
                             </div>
                             <div class="col d-flex align-items-center flex-column">
-                                <div class="fw-semibold fs-1" id="completed-issues">0</div>
-                                <div class="font-size-14 text-white-50">เสร็จสิ้น</div>
+                                <div class="fw-semibold fs-1" id="teacher-user">0</div>
+                                <div class="font-size-14 text-white-50">คุณครู</div>
                             </div>
                         </div>
                     </div>
@@ -137,126 +137,27 @@
             <div class="container-fluid text-white p-0 pb-3 mb-5 bg-opacity-100 bg-white rounded-4 shadow">
                 <div class="d-flex p-3 justify-content-between align-items-center ">
                     <span class="font-size-14 text-muted">
-                        <i class="fa-solid fa-cloud-arrow-down me-1"></i>
-                        รายการการแจ้งปัญหา
+                        <i class="fa-regular fa-users me-1"></i>
+                        รายการผู้ใช้งานระบบ
                     </span>
                 </div>
 
-                <div class="p-3" id="report-list"></div>
-                <div id="pagination" class="mt-0"></div>
-            </div>
+                <div class="row" id="user-list"></div>
+                <nav>
+                    <ul class="pagination justify-content-center mt-3" id="pagination"></ul>
+                </nav>
 
-        </div>
-    </div>
-
-    <!-- ToastAlert -->
-    <div aria-live="polite" aria-atomic="true" class="position-relative">
-        <div id="toast-container" class="toast-container position-fixed"></div>
-    </div>
-
-    <div class="modal fade" id="receiveReportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content border-0 rounded-5">
-                <div class="modal-body px-4 text-center">
-                    <h1 class="mb-0 text-warning"><i class="fa-solid fa-triangle-exclamation fa-xl"></i></h1>
-                    <h6 class="mt-4 fw-normal text-danger font-size-14">
-                        คุณแน่ใจหรือไม่ว่าต้องการรับการแจ้งปัญหารายการนี้?</h6>
-                </div>
-                <div class="modal-footer d-flex flex-nowrap p-0" style="border-color:#dee2e6">
-                    <button type="button"
-                        class="btn btn-lg btn-link text-decoration-none font-size-14 col-6 py-3 m-0 rounded-0 border-end"
-                        id="receiveReportConfirmBtn">ยืนยัน</button>
-                    <button type="button"
-                        class="btn btn-lg btn-link text-decoration-none font-size-14 col-6 py-3 m-0 rounded-0"
-                        data-bs-dismiss="modal">ยกเลิก</button>
-                </div>
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="closedjobReportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content border-0 rounded-5">
-                <div class="modal-body px-4 text-center">
-                    <h1 class="mb-0 text-warning"><i class="fa-solid fa-triangle-exclamation fa-xl"></i></h1>
-                    <h6 class="mt-4 fw-normal text-danger font-size-14">
-                        คุณแน่ใจหรือไม่ว่าต้องการปิดงานรายการนี้?</h6>
-                </div>
-                <div class="modal-footer d-flex flex-nowrap p-0" style="border-color:#dee2e6">
-                    <button type="button"
-                        class="btn btn-lg btn-link text-decoration-none font-size-14 col-6 py-3 m-0 rounded-0 border-end"
-                        id="closedjobReportConfirmBtn">ยืนยัน</button>
-                    <button type="button"
-                        class="btn btn-lg btn-link text-decoration-none font-size-14 col-6 py-3 m-0 rounded-0"
-                        data-bs-dismiss="modal">ยกเลิก</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="cancelReportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content border-0 rounded-5">
-                <div class="modal-body px-4 text-center">
-                    <h1 class="mb-0 text-warning"><i class="fa-solid fa-triangle-exclamation fa-xl"></i></h1>
-                    <h6 class="mt-4 fw-normal text-danger font-size-14">คุณแน่ใจหรือไม่ว่าต้องการยกเลิกรายการนี้?</h6>
-                </div>
-                <div class="modal-footer d-flex flex-nowrap p-0" style="border-color:#dee2e6">
-                    <button type="button"
-                        class="btn btn-lg btn-link text-decoration-none font-size-14 col-6 py-3 m-0 rounded-0 border-end"
-                        id="cancelReportConfirmBtn">ยืนยัน</button>
-                    <button type="button"
-                        class="btn btn-lg btn-link text-decoration-none font-size-14 col-6 py-3 m-0 rounded-0"
-                        data-bs-dismiss="modal">ปิด</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="deleteReportModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content border-0 rounded-5">
-                <div class="modal-body px-4 text-center">
-                    <h1 class="mb-0 text-warning"><i class="fa-solid fa-triangle-exclamation fa-xl"></i></h1>
-                    <h6 class="mt-4 fw-normal text-danger font-size-14">คุณแน่ใจหรือไม่ว่าต้องการลบายการนี้ออกจากระบบ?</h6>
-                </div>
-                <div class="modal-footer d-flex flex-nowrap p-0" style="border-color:#dee2e6">
-                    <button type="button"
-                        class="btn btn-lg btn-link text-decoration-none font-size-14 col-6 py-3 m-0 rounded-0 border-end"
-                        id="deleteReportConfirmBtn">ยืนยัน</button>
-                    <button type="button"
-                        class="btn btn-lg btn-link text-decoration-none font-size-14 col-6 py-3 m-0 rounded-0"
-                        data-bs-dismiss="modal">ปิด</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body p-0">
-                    <img id="modalImage" src="" class="img-fluid" alt="Preview">
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Loader -->
     <script>
-
         setTimeout(() => {
             document.getElementById('loader-container').style.display = 'none';
             document.querySelector('.main-container').style.display = '';
         }, 1500);
     </script>
-
     <!-- LoadIcon -->
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
 
@@ -273,17 +174,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-
     <!-- โหลด pageConfig.js ก่อน -->
     <script src="../script/pageConfig.js"></script>
     <!-- โหลด userDataManager.js -->
     <script src="../script/userDataManager.js"></script>
     <!-- โหลด script.js -->
     <script src="../script/script.js"></script>
-    <!-- โหลด filebase.js ทีหลัง -->
     <script src="../script/filebase.js"></script>
-    <!-- โหลด checkreport.js ทีหลัง -->
-    <script src="../script/checkreport.js"></script>
+    <script src="../script/userManager.js"></script>
 </body>
 
 </html>

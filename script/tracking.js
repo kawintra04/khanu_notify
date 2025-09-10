@@ -130,6 +130,11 @@ const getissuelist = (snapshot) => {
                                 onclick="cancelIssue('${id}')"
                                 title="ยกเลิกรายการ">
                             </i> 
+                            <i class="fa-solid fa-trash-can text-danger ${data.status === 'ยกเลิก' ? '' : 'd-none'}"
+                                role="button"
+                                onclick="deleteIssue('${id}')"
+                                title="ลบรายการ">
+                            </i> 
                         </div>
                     </div>
                 </div>
@@ -137,6 +142,32 @@ const getissuelist = (snapshot) => {
         issueList.appendChild(issueItem);
     });
 }
+
+const deleteIssue = async (docId) => {
+    const Modal = new bootstrap.Modal(document.getElementById('deleteReportModal'));
+    Modal.show();
+
+    const confirmBtn = document.getElementById('deleteReportConfirmBtn');
+
+    confirmBtn.onclick = async () => {
+        Modal.hide(); // ซ่อนโมดอลหลังทำงานเสร็จ
+        showLoader(2000); // แสดง loader เป็นเวลา 2 วินาที
+        try {
+            const profile = await liff.getProfile();
+            const lineUserId = profile.userId;
+            const issueRef = db.collection("reports").doc(lineUserId).collection("issues").doc(docId);
+
+            await issueRef.delete();
+
+            toastAlert(1, "ลบการแจ้งปัญหาออกจากระบบเรียบร้อยแล้ว");
+            getDataAllReport(); // รีเฟรชข้อมูล
+
+        } catch (error) {
+            console.error("Error updating document: ", error);
+            toastAlert(3, "เกิดข้อผิดพลาดในการยกเลิกรายการ");
+        }
+    }
+};
 
 const cancelIssue = async (docId) => {
     const Modal = new bootstrap.Modal(document.getElementById('cancelReportModal'));
