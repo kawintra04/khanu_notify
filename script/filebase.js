@@ -438,6 +438,98 @@ const getFeedIssues = async () => {
     }
 }
 
+const issueReactions = [
+    { type: "like", label: "ถูกใจ", icon: "fa-thumbs-up", color: "text-primary" },
+    { type: "love", label: "รักเลย", icon: "fa-heart", color: "text-danger" },
+    { type: "haha", label: "ฮาฮา", icon: "fa-face-laugh", color: "text-warning" },
+    { type: "wow", label: "ว้าว", icon: "fa-face-surprise", color: "text-info" },
+    { type: "sad", label: "เศร้า", icon: "fa-face-sad-tear", color: "text-secondary" },
+    { type: "angry", label: "โกรธ", icon: "fa-face-angry", color: "text-danger" }
+];
+
+const getReactionUsers = (reactions, type) => {
+    const users = reactions?.[type];
+    return Array.isArray(users) ? users : [];
+};
+
+const toggleIssueReaction = async (userId, issueId, reactionType, feedcard) => {
+    const currentUserId = window.globalUserData?.lineUserId;
+    if (!currentUserId) {
+        toastAlert(0, "กรุณาเข้าสู่ระบบผ่าน LINE ก่อนแสดงความรู้สึก");
+        return;
+    }
+
+    const buttons = feedcard.querySelectorAll("[data-reaction]");
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+
+    try {
+        const issueRef = db.collection("reports")
+            .doc(userId)
+            .collection("issues")
+            .doc(issueId);
+
+        const updatedReactions = await db.runTransaction(async transaction => {
+            const issueSnapshot = await transaction.get(issueRef);
+            if (!issueSnapshot.exists) {
+                throw new Error("ไม่พบรายงานนี้");
+            }
+
+            const savedReactions = issueSnapshot.data().reactions || {};
+            const removingCurrentReaction = getReactionUsers(savedReactions, reactionType)
+                .includes(currentUserId);
+            const nextReactions = {};
+
+            issueReactions.forEach(({ type }) => {
+                nextReactions[type] = getReactionUsers(savedReactions, type)
+                    .filter(id => id !== currentUserId);
+            });
+
+            if (!removingCurrentReaction) {
+                nextReactions[reactionType].push(currentUserId);
+            }
+
+            transaction.update(issueRef, { reactions: nextReactions });
+            return nextReactions;
+        });
+
+        updateFeedReactionDisplay(feedcard, updatedReactions, currentUserId);
+    } catch (error) {
+        console.error("Failed to save issue reaction:", error);
+        toastAlert(0, "บันทึกความรู้สึกไม่สำเร็จ กรุณาลองอีกครั้ง");
+    } finally {
+        buttons.forEach(button => {
+            button.disabled = false;
+        });
+    }
+};
+
+const updateFeedReactionDisplay = (feedcard, reactions, currentUserId) => {
+    feedcard.dataset.reactions = JSON.stringify(reactions);
+    let totalCount = 0;
+
+    issueReactions.forEach(({ type }) => {
+        const users = getReactionUsers(reactions, type);
+        totalCount += users.length;
+
+        const button = feedcard.querySelector(`[data-reaction="${type}"]`);
+        button.querySelector(".reaction-count").textContent = users.length;
+        const isSelected = users.includes(currentUserId);
+        button.classList.toggle("active", isSelected);
+        button.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    feedcard.querySelector(".reaction-total").textContent = `${totalCount} คนแสดงความรู้สึก`;
+};
+
+window.addEventListener("userDataReady", () => {
+    const currentUserId = window.globalUserData?.lineUserId;
+    document.querySelectorAll("#feedIssues .card[data-reactions]").forEach(feedcard => {
+        updateFeedReactionDisplay(feedcard, JSON.parse(feedcard.dataset.reactions), currentUserId);
+    });
+});
+
 const genaralFeedIssues = async (reports) => {
     const dataContainer = document.getElementById('feedIssues');
     dataContainer.innerHTML = "";
@@ -484,30 +576,27 @@ const genaralFeedIssues = async (reports) => {
      style="max-height: 250px; object-fit: cover;">
                 </div>
                 <div class="d-flex align-items-center mt-2">
-                    <div class="btn-group" role="group" aria-label="Feelings">
-                        <button type="button" class="btn btn-light px-2" title="ถูกใจ">
-                            <i class="fa-solid fa-thumbs-up text-primary"></i>
-                        </button>
-                        <button type="button" class="btn btn-light px-2" title="รักเลย">
-                            <i class="fa-solid fa-heart text-danger"></i>
-                        </button>
-                        <button type="button" class="btn btn-light px-2" title="ฮาฮา">
-                            <i class="fa-solid fa-face-laugh text-warning"></i>
-                        </button>
-                        <button type="button" class="btn btn-light px-2" title="ว้าว">
-                            <i class="fa-solid fa-face-surprise text-info"></i>
-                        </button>
-                        <button type="button" class="btn btn-light px-2" title="เศร้า">
-                            <i class="fa-solid fa-face-sad-tear text-secondary"></i>
-                        </button>
-                        <button type="button" class="btn btn-light px-2" title="โกรธ">
-                            <i class="fa-solid fa-face-angry text-danger"></i>
-                        </button>
+                    <div class="btn-group" role="group" aria-label="ความรู้สึก">
+                        ${issueReactions.map(({ type, label, icon, color }) => `
+                            <button type="button" class="btn btn-light px-2" title="${label}"
+                                data-reaction="${type}" aria-label="${label}" aria-pressed="false">
+                                <i class="fa-solid ${icon} ${color}"></i>
+                                <span class="reaction-count ms-1">${getReactionUsers(report.reactions, type).length}</span>
+                            </button>
+                        `).join("")}
                     </div>
-                    <span class="ms-2 font-size-12 text-secondary">ถูกใจ 5 คน</span>
+                    <span class="reaction-total ms-2 font-size-12 text-secondary">0 คนแสดงความรู้สึก</span>
                 </div>
             </div>
         `;
+
+        const currentUserId = window.globalUserData?.lineUserId;
+        updateFeedReactionDisplay(feedcard, report.reactions || {}, currentUserId);
+        feedcard.querySelectorAll("[data-reaction]").forEach(button => {
+            button.addEventListener("click", () => {
+                toggleIssueReaction(report.userId, report.id, button.dataset.reaction, feedcard);
+            });
+        });
 
         dataContainer.appendChild(feedcard);
     });
