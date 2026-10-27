@@ -507,20 +507,15 @@ const toggleIssueReaction = async (userId, issueId, reactionType, feedcard) => {
 
 const updateFeedReactionDisplay = (feedcard, reactions, currentUserId) => {
     feedcard.dataset.reactions = JSON.stringify(reactions);
-    let totalCount = 0;
 
     issueReactions.forEach(({ type }) => {
         const users = getReactionUsers(reactions, type);
-        totalCount += users.length;
 
         const button = feedcard.querySelector(`[data-reaction="${type}"]`);
-        button.querySelector(".reaction-count").textContent = users.length;
         const isSelected = users.includes(currentUserId);
         button.classList.toggle("active", isSelected);
         button.setAttribute("aria-pressed", String(isSelected));
     });
-
-    feedcard.querySelector(".reaction-total").textContent = `${totalCount} คนแสดงความรู้สึก`;
 };
 
 window.addEventListener("userDataReady", () => {
@@ -575,17 +570,13 @@ const genaralFeedIssues = async (reports) => {
                     <img src="${imageUrl}" alt="problem" class="rounded-3 w-100"
      style="max-height: 250px; object-fit: cover;">
                 </div>
-                <div class="d-flex align-items-center mt-2">
-                    <div class="btn-group" role="group" aria-label="ความรู้สึก">
+                <div class="reaction-actions mt-3" role="group" aria-label="ความรู้สึก">
                         ${issueReactions.map(({ type, label, icon, color }) => `
-                            <button type="button" class="btn btn-light px-2" title="${label}"
+                            <button type="button" class="reaction-button" title="${label}"
                                 data-reaction="${type}" aria-label="${label}" aria-pressed="false">
                                 <i class="fa-solid ${icon} ${color}"></i>
-                                <span class="reaction-count ms-1">${getReactionUsers(report.reactions, type).length}</span>
                             </button>
                         `).join("")}
-                    </div>
-                    <span class="reaction-total ms-2 font-size-12 text-secondary">0 คนแสดงความรู้สึก</span>
                 </div>
             </div>
         `;
